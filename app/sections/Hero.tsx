@@ -68,20 +68,13 @@ const navLinks = [
 </nav>
         
         <div className="hidden md:block w-32 text-right">
-          <span className="text-xs text-zinc-600 font-mono">v1.0.2026</span>
         </div>
       </header>
 
       {/* 📝 CONTENIDO DE TEXTO ASIMÉTRICO */}
       <div className="relative z-10 container mx-auto px-6 lg:px-12 max-w-7xl w-full flex-grow flex flex-col justify-center items-start text-left mb-16">
         
-        <div className="inline-flex items-center gap-2 bg-cyan-950/40 border border-cyan-500/30 rounded-full px-4 py-1.5 mb-6 shadow-[0_0_15px_rgba(6,182,212,0.15)]">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-          <span className="text-xs font-bold tracking-widest text-cyan-400 uppercase">
-            Software a Medida
-          </span>
-        </div>
-
+     
         <h1 className="text-5xl font-black tracking-tight sm:text-7xl leading-[1.05] max-w-3xl mb-6">
           <span className="block text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">Código tan valioso</span>
           <span className="inline-block mt-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent px-4 py-2 bg-cyan-950/30 rounded-xl border border-cyan-500/10 shadow-inner">

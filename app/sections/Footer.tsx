@@ -1,6 +1,19 @@
-// app/sections/Footer.tsx
 "use client";
 import Link from "next/link";
+
+// 💡 Declaramos el array de enlaces de la empresa de forma limpia
+const COMPANY_LINKS = [
+  { name: "Sobre nosotros", href: "/company/aboutus" },
+  { name: "Misión", href: "/company/mision" },
+  { name: "Visión", href: "/company/vision" },
+  { name: "Blog corporativo", href: "/blog" }, // Tu blog sigue igual
+];
+
+const SOCIAL_LINKS = [
+  { name: "GitHub ↗", href: "https://github.com/Eliud2005" },
+  { name: "LinkedIn ↗", href: "https://linkedin.com" },
+  { name: "Twitter / X ↗", href: "https://twitter.com" },
+];
 
 export default function Footer() {
   return (
@@ -20,66 +33,40 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Columna 2: Apartado de Empresa */}
+          {/* Columna 2: Apartado de Empresa mapeado dinámicamente */}
           <div>
             <h4 className="text-xs font-semibold text-zinc-200 uppercase tracking-widest mb-4">
               Empresa
             </h4>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <Link href="#about" className="hover:text-cyan-400 transition-colors">
-                  Sobre nosotros
-                </Link>
-              </li>
-              <li>
-                <Link href="#blog" className="hover:text-cyan-400 transition-colors">
-                  Blog corporativo
-                </Link>
-              </li>
-              <li>
-                <Link href="#careers" className="hover:text-cyan-400 transition-colors">
-                  Misión y Visión
-                </Link>
-              </li>
+              {COMPANY_LINKS.map((link, index) => (
+                <li key={index}>
+                  <Link href={link.href} className="hover:text-cyan-400 transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Columna 3: Redes Sociales */}
+          {/* Columna 3: Redes Sociales mapeadas dinámicamente */}
           <div>
             <h4 className="text-xs font-semibold text-zinc-200 uppercase tracking-widest mb-4">
               Redes Sociales
             </h4>
             <ul className="space-y-2.5 text-sm">
-              <li>
-                <a 
-                  href="https://github.com/Eliud2005" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1.5"
-                >
-                  GitHub ↗
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://linkedin.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1.5"
-                >
-                  LinkedIn ↗
-                </a>
-              </li>
-              <li>
-                <a 
-                  href="https://twitter.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1.5"
-                >
-                  Twitter / X ↗
-                </a>
-              </li>
+              {SOCIAL_LINKS.map((social, index) => (
+                <li key={index}>
+                  <a 
+                    href={social.href} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="hover:text-cyan-400 transition-colors inline-flex items-center gap-1.5"
+                  >
+                    {social.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -91,8 +78,8 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} DiamondCode. Todos los derechos reservados.
           </p>
           <div className="flex gap-6">
-           <Link href="/privacy" className="hover:text-zinc-400 transition-colors">Aviso de Privacidad</Link>
-          <Link href="/terms" className="hover:text-zinc-400 transition-colors">Términos de Servicio</Link>
+            <Link href="/privacy" className="hover:text-zinc-400 transition-colors">Aviso de Privacidad</Link>
+            <Link href="/terms" className="hover:text-zinc-400 transition-colors">Términos de Servicio</Link>
           </div>
         </div>
 

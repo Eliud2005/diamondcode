@@ -28,9 +28,7 @@ export default function Projects() {
             
             {/* Lado izquierdo: Textos del proyecto */}
             <div className="flex flex-col justify-center">
-              <span className="text-xs font-semibold tracking-widest text-cyan-400 uppercase mb-2">
-                Featured Case Study
-              </span>
+              
               <h3 className="text-3xl font-bold text-zinc-100 mb-4 group-hover:text-cyan-400 transition-colors">
                 Nube Serpiente
               </h3>
