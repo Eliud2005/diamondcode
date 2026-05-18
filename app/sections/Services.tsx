@@ -1,8 +1,13 @@
 // app/sections/Services.tsx
 export default function Services() { 
   return (
-    <section id="services" className="py-24 bg-black text-white">
-      <div className="container mx-auto px-6 max-w-6xl">
+    <section id="services" className="py-24 bg-black text-white relative overflow-hidden">
+      
+      {/* 💡 LUCES VERDES ULTRA NOTABLES EN EL TRASFONDO OSCURO */}
+      <div className="absolute top-[10%] left-[5%] w-[600px] h-[600px] bg-emerald-500/[0.22] rounded-full blur-[140px] pointer-events-none z-0" />
+      <div className="absolute bottom-[5%] right-[5%] w-[550px] h-[550px] bg-green-400/[0.18] rounded-full blur-[140px] pointer-events-none z-0" />
+
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
         
         {/* Cabecera de la sección */}
         <div className="text-center mb-16">
@@ -10,7 +15,7 @@ export default function Services() {
             Nuestros Servicios
           </h2>
           <p className="mt-4 text-lg text-zinc-400 max-w-xl mx-auto">
-            Creamos experiencias web de alta calidad, ultra rápidas y optimizadas para hacer crecer tu negocio.
+            Creamos experiences web de alta calidad, ultra rápidas y optimizadas para hacer crecer tu negocio.
           </p>
         </div>
 

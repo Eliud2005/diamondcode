@@ -6,13 +6,12 @@ const COMPANY_LINKS = [
   { name: "Sobre nosotros", href: "/company/aboutus" },
   { name: "Misión", href: "/company/mision" },
   { name: "Visión", href: "/company/vision" },
-  { name: "Blog corporativo", href: "/blog" }, // Tu blog sigue igual
+  //{ name: "Blog corporativo", href: "/blog" }, // Tu blog sigue igual
 ];
 
 const SOCIAL_LINKS = [
-  { name: "GitHub ↗", href: "https://github.com/Eliud2005" },
-  { name: "LinkedIn ↗", href: "https://linkedin.com" },
-  { name: "Twitter / X ↗", href: "https://twitter.com" },
+  { name: "GitHub ↗", href: "https://github.com/diamondcodemx" },
+  { name: "LinkedIn ↗", href: "https://linkedin.com/in/diamondcodemx" },
 ];
 
 export default function Footer() {

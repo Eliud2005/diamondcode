@@ -28,13 +28,18 @@ const navLinks = [
 
         {/* 💎 IMAGEN DEL DIAMANTE CON MÁSCARA PARA INTEGRAR EL FONDO (Solución anterior incluida) */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-       <img 
+<img 
   src="../assets/images/logo.png" 
   alt="Diamond Render" 
-  className="absolute right-[-5%] sm:right-[5%] top-[25%] sm:top-[20%] w-[350px] sm:w-[700px] h-auto object-contain mix-blend-screen drop-shadow-[0_0_50px_rgba(6,182,212,0.3)] animate-[bounce_6s_infinite] pointer-events-none 
-  [mask-image:radial-gradient(circle_at_center,black_65%,black_70%,transparent_85%)]"
+  className="absolute right-[-5%] sm:right-[5%] top-[25%] sm:top-[20%] w-[350px] sm:w-[700px] h-auto object-contain pointer-events-none drop-shadow-[0_0_50px_rgba(6,182,212,0.3)] animate-[bounce_6s_infinite]
+  
+  /* 🔥 CAMBIO 1: Mezcla de color más limpia (si screen te da problemas, prueba color-dodge) */
+  mix-blend-screen 
+  
+  /* 🔥 CAMBIO 2: Máscara ultra suave. El degradado va desde negro sólido en el centro hasta transparente absoluto en los bordes */
+  [mask-image:radial-gradient(circle_at_center,rgba(0,0,0,1)_30%,rgba(0,0,0,0.5)_60%,rgba(0,0,0,0)_100%)]
+  [-webkit-mask-image:radial-gradient(circle_at_center,rgba(0,0,0,1)_30%,rgba(0,0,0,0.5)_60%,rgba(0,0,0,0)_100%)]"
 />
-
         <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-zinc-900/40 to-transparent skew-x-12 blur-sm opacity-50" />
         <div className="absolute bottom-0 right-0 w-96 h-48 bg-gradient-to-tr from-zinc-950 to-transparent -skew-y-12 opacity-80" />
       </div>

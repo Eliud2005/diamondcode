@@ -1,10 +1,14 @@
-// app/sections/Projects.tsx
 import Link from "next/link"; // 👈 Importamos el componente Link de Next.js
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 bg-black text-white border-t border-zinc-900">
-      <div className="container mx-auto px-6 max-w-5xl">
+    <section id="projects" className="py-24 bg-black text-white border-t border-zinc-900 relative overflow-hidden">
+      
+      {/* 💡 LUCES VERDES ULTRA NOTABLES EN EL TRASFONDO OSCURO */}
+      <div className="absolute -top-[10%] left-0 w-[500px] h-[500px] bg-emerald-500/[0.22] rounded-full blur-[130px] pointer-events-none z-0" />
+      <div className="absolute -bottom-[10%] right-0 w-[500px] h-[500px] bg-green-400/[0.18] rounded-full blur-[130px] pointer-events-none z-0" />
+
+      <div className="container mx-auto px-6 max-w-5xl relative z-10">
         
         {/* Cabecera de la sección */}
         <div className="mb-16 text-center md:text-left">
@@ -19,7 +23,7 @@ export default function Projects() {
         {/* TARJETA DESTACADA COMO LINK COMPLETO */}
         {/* 💡 Cambia el href="..." por el link real de Nube Serpiente cuando esté listo */}
         <Link 
-          href="https://www.youtube.com" 
+          href="#" 
           target="_blank" 
           rel="noopener noreferrer"
           className="block group relative rounded-3xl bg-zinc-900/40 border border-zinc-800 p-8 md:p-12 transition-all duration-300 hover:border-cyan-500/50 hover:bg-zinc-900/60 shadow-2xl backdrop-blur-sm cursor-pointer"
