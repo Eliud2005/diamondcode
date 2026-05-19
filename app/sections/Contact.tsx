@@ -29,7 +29,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contacto" className="py-24 bg-[#030303] text-white border-t border-zinc-900/60 scroll-mt-20 relative overflow-hidden">
+    <section id="contact" className="py-24 bg-[#030303] text-white border-t border-zinc-900/60 scroll-mt-20 relative overflow-hidden">
       
       {/* 1. TEXTURA DE RUIDO/GRANO PREMIUM (Sutil y elegante, rompe el plano negro) */}
       <div className="absolute inset-0 opacity-[0.015] bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPg==')] bg-repeat pointer-events-none z-0" />
