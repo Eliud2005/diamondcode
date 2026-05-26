@@ -64,6 +64,26 @@ export default function Services() {
               Invitaciones digitales personalizadas para eventos especiales, bodas, fiestas y celebraciones. Diseños únicos que impresionan a tus invitados desde el primer clic.
             </p>
           </div>
+          {/* Tarjeta 5: Rediseño y optimización */}
+          <div className="group relative rounded-2xl bg-zinc-900/50 p-8 border border-zinc-800 hover:border-cyan-500/50 transition-all duration-300 shadow-xl backdrop-blur-sm hover:-translate-y-1">
+            <div className="mb-4 text-3xl text-cyan-400 font-bold">05</div>
+            <h3 className="text-2xl font-bold text-zinc-100 mb-3 group-hover:text-cyan-400 transition-colors">
+              Rediseño y optimización
+            </h3>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              Rediseño y optimización de sitios web para mejorar la experiencia del usuario y el rendimiento en los motores de búsqueda.
+            </p>
+          </div>
+          {/* Tarjeta 6: Consultoria tecnológica */}
+          <div className="group relative rounded-2xl bg-zinc-900/50 p-8 border border-zinc-800 hover:border-cyan-500/50 transition-all duration-300 shadow-xl backdrop-blur-sm hover:-translate-y-1">
+            <div className="mb-4 text-3xl text-cyan-400 font-bold">06</div>
+            <h3 className="text-2xl font-bold text-zinc-100 mb-3 group-hover:text-cyan-400 transition-colors">
+              Consultoria tecnológica
+            </h3>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              Asesoramiento especializado en tecnologías digitales para impulsar la transformación y el crecimiento de tu negocio.
+            </p>
+          </div>
 
         </div>
 
