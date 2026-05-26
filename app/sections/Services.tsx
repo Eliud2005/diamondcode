@@ -54,6 +54,16 @@ export default function Services() {
               Sistemas personalizados, paneles de administración (dashboards) y plataformas web complejas construidas con la tecnología más avanzada del mercado.
             </p>
           </div>
+          {/* Tarjeta 4: Invitaciones digitales */}
+          <div className="group relative rounded-2xl bg-zinc-900/50 p-8 border border-zinc-800 hover:border-cyan-500/50 transition-all duration-300 shadow-xl backdrop-blur-sm hover:-translate-y-1">
+            <div className="mb-4 text-3xl text-cyan-400 font-bold">04</div>
+            <h3 className="text-2xl font-bold text-zinc-100 mb-3 group-hover:text-cyan-400 transition-colors">
+              Invitaciones digitales
+            </h3>
+            <p className="text-zinc-400 text-sm leading-relaxed">
+              Invitaciones digitales personalizadas para eventos especiales, bodas, fiestas y celebraciones. Diseños únicos que impresionan a tus invitados desde el primer clic.
+            </p>
+          </div>
 
         </div>
 
