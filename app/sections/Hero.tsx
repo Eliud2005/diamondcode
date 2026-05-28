@@ -24,10 +24,14 @@ export default function Hero() {
     let animationFrameId: number;
     let particles: Particle[] = [];
     let cycleTimeout: NodeJS.Timeout;
+    let isMobile = false;
 
+    // Configuración y dimensionamiento inteligente del Canvas
     const resizeCanvas = () => {
-      canvas.width = window.innerWidth > 640 ? 700 : 350;
-      canvas.height = window.innerWidth > 640 ? 700 : 350;
+      const width = window.innerWidth;
+      isMobile = width <= 640;
+      canvas.width = isMobile ? 350 : 700;
+      canvas.height = isMobile ? 350 : 700;
     };
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -55,9 +59,8 @@ export default function Hero() {
         this.x = cWidth / 2 + Math.cos(this.angle) * this.radius;
         this.y = (cHeight * 0.4) + Math.sin(this.angle) * this.radius;
         
-        // Tamaños ligeramente más variados para mayor profundidad dimensional
-        this.size = Math.random() * 3.5 + 0.8;
-        // Velocidad de rotación ligeramente aumentada para mayor dinamismo
+        // Partículas ligeramente más pequeñas en móvil para mejorar nitidez
+        this.size = isMobile ? (Math.random() * 2 + 0.6) : (Math.random() * 3.5 + 0.8);
         this.speed = Math.random() * 0.05 + 0.025;
         this.alpha = 0;
         
@@ -68,27 +71,30 @@ export default function Hero() {
         this.targetX = (cWidth / 2) + (Math.cos(t) * r * (cWidth * 0.22));
         this.targetY = (cHeight * 0.32) + (Math.sin(t) * r * (cHeight * 0.22)) * 1.1;
 
-        const colors = ["#22d3ee", "#06b6d4", "#0891b2", "#3b82f6", "#ffffff"];
+        // Mayor porcentaje de partículas brillantes en móvil para compensar la falta de sombras
+        const colors = isMobile 
+          ? ["#ffffff", "#22d3ee", "#06b6d4", "#ffffff"] 
+          : ["#22d3ee", "#06b6d4", "#0891b2", "#3b82f6", "#ffffff"];
         this.color = colors[Math.floor(Math.random() * colors.length)];
       }
 
       update(timeline: number, currentCanvas: HTMLCanvasElement) {
-        // 🔥 EXTENSIÓN: La Fase 1 ahora dura hasta el frame 110 para mayor suspenso visual
+        // Fase 1: Torbellino extendido en espiral (110 frames)
         if (timeline < 110) {
           this.angle += this.speed;
-          this.radius -= (this.radius - 35) * 0.025; // Contracción centrípeta fluida
+          this.radius -= (this.radius - 35) * 0.025;
           this.x = currentCanvas.width / 2 + Math.cos(this.angle) * this.radius;
           this.y = (currentCanvas.height * 0.35) + Math.sin(this.angle) * this.radius;
           if (this.alpha < 1) this.alpha += 0.04;
         } 
-        // Fase 2: Magnetización violenta hacia la estructura molecular del diamante
+        // Fase 2: Magnetización veloz hacia el diamante
         else if (timeline >= 110 && timeline < 155) {
           const dx = this.targetX - this.x;
           const dy = this.targetY - this.y;
-          this.x += dx * 0.14; // Atracción de gravedad acelerada
+          this.x += dx * 0.14;
           this.y += dy * 0.14;
         } 
-        // Fase 3: Disolución óptica limpia
+        // Fase 3: Desvanecimiento óptico
         else {
           this.alpha -= 0.04;
         }
@@ -107,8 +113,12 @@ export default function Hero() {
         currentCtx.lineTo(this.x - this.size, this.y);
         currentCtx.closePath();
         
-        currentCtx.shadowBlur = 12;
-        currentCtx.shadowColor = "#06b6d4";
+        // 🔥 OPTIMIZACIÓN: Saltarse el renderizado de sombras pesadas si es pantalla móvil
+        if (!isMobile) {
+          currentCtx.shadowBlur = 12;
+          currentCtx.shadowColor = "#06b6d4";
+        }
+        
         currentCtx.fill();
         currentCtx.restore();
       }
@@ -117,8 +127,11 @@ export default function Hero() {
     const initEffect = () => {
       setIsAssembled(false);
       particles = [];
-      // 🔥 DENSIDAD: Subimos de 140 a 260 partículas para un vórtice imponente
-      for (let i = 0; i < 260; i++) {
+      
+      // 🔥 FILTRO: Carga balanceada de partículas según el dispositivo
+      const totalParticles = isMobile ? 120 : 260;
+      
+      for (let i = 0; i < totalParticles; i++) {
         particles.push(new Particle(canvas.width, canvas.height));
       }
       
@@ -133,7 +146,6 @@ export default function Hero() {
 
         timeline++;
 
-        // Sincronizado: El logo sólido se revela justo en el punto de máxima cohesión
         if (timeline === 145) {
           setIsAssembled(true);
         }
@@ -176,13 +188,13 @@ export default function Hero() {
         {/* Malla de Ingeniería de fondo */}
         <div className="absolute right-[5%] top-[25%] w-[500px] h-[500px] bg-[linear-gradient(to_right,#0c1a24_1px,transparent_1px),linear-gradient(to_bottom,#0c1a24_1px,transparent_1px)] bg-[size:30px_30px] opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-        {/* 💎 CONTENEDOR ANIDADO DE RENDERIZADO */}
-        <div className="absolute right-[-5%] sm:right-[5%] top-[22%] sm:top-[16%] w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] flex items-start justify-center pointer-events-none select-none">
+        {/* 💎 CONTENEDOR DE RENDERIZADO CON ACELERACIÓN POR HARDWARE (will-change-transform) */}
+        <div className="absolute right-[-5%] sm:right-[5%] top-[22%] sm:top-[16%] w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] flex items-start justify-center pointer-events-none select-none will-change-transform">
           
           {/* Canvas dinámico */}
           <canvas 
             ref={canvasRef} 
-            className="absolute inset-0 z-10 mix-blend-screen"
+            className="absolute inset-0 z-10 mix-blend-screen will-change-transform"
           />
 
           {/* Imagen del Diamante */}
@@ -190,7 +202,7 @@ export default function Hero() {
           <img 
             src="../assets/images/logo.png" 
             alt="Diamond Render" 
-            className={`w-full h-auto object-contain transition-all duration-700 ease-out 
+            className={`w-full h-auto object-contain transition-all duration-700 ease-out will-change-transform 
               ${isAssembled 
                 ? "opacity-100 scale-100 blur-0 drop-shadow-[0_0_50px_rgba(6,182,212,0.45)] animate-[bounce_6s_infinite]" 
                 : "opacity-0 scale-95 blur-md drop-shadow-[0_0_0px_rgba(0,0,0,0)]"
