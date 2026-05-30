@@ -11,7 +11,7 @@ const COMPANY_LINKS = [
 
 const SOCIAL_LINKS = [
   { name: "GitHub ↗", href: "https://github.com/diamondcodemx" },
-  { name: "LinkedIn ↗", href: "https://linkedin.com/in/diamondcodemx" },
+  { name: "LinkedIn ↗", href: "https://linkedin.com/in/eliudgh" },
 ];
 
 export default function Footer() {
