@@ -58,7 +58,7 @@ export default function Contact() {
             <div className="text-sm text-zinc-400 border-t border-zinc-900 pt-6">
               <p className="text-zinc-500 text-xs uppercase font-semibold tracking-wider mb-1">Contacto directo:</p>
               <a href="mailto:diamondcode000@gmail.com" className="text-cyan-400 hover:text-cyan-300 transition-colors text-lg font-medium">
-                diamondcode000@gmail.com
+                eliud@diamondcode.mx
               </a>
             </div>
           </div>
