@@ -4,6 +4,7 @@ import Services from "./sections/Services";
 import Projects from "./sections/Projects";
 import Contact from "./sections/Contact";
 import Footer from "./sections/Footer";
+import Chatbot from "./components/Chatbot";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
         <Projects />
         <Contact />
         <Footer />
+        <Chatbot />
       </main>
     </div>
   );

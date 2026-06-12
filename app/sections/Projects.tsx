@@ -36,33 +36,33 @@ export default function Projects() {
   const [activeProject, setActiveProject] = useState(PROJECTS_DATA[0]);
 
   return (
-    <section id="projects" className="py-24 bg-black text-white border-t border-zinc-900 relative overflow-hidden">
+    <section id="projects" className="py-24 bg-gradient-to-b from-[#06080f] via-[#0c1120] to-[#06080f] text-white border-t border-zinc-900 relative overflow-hidden">
       
-      {/* 💡 LUCES VERDES EN EL TRASFONDO OSCURO */}
-      <div className="absolute -top-[10%] left-0 w-[500px] h-[500px] bg-emerald-500/[0.22] rounded-full blur-[130px] pointer-events-none z-0" />
-      <div className="absolute -bottom-[10%] right-0 w-[500px] h-[500px] bg-green-400/[0.18] rounded-full blur-[130px] pointer-events-none z-0" />
+      {/* 💡 ILUMINACIÓN DE ESTUDIO PREMIUM (CIAN Y INDIGO) */}
+      <div className="absolute -top-[10%] left-0 w-[500px] h-[500px] bg-cyan-500/[0.08] rounded-full blur-[130px] pointer-events-none z-0" />
+      <div className="absolute -bottom-[10%] right-0 w-[500px] h-[500px] bg-blue-600/[0.08] rounded-full blur-[130px] pointer-events-none z-0" />
 
       <div className="container mx-auto px-6 max-w-5xl relative z-10">
         
         {/* Cabecera de la sección */}
         <div className="mb-12 text-center md:text-left">
-          <h2 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent sm:text-5xl">
+          <h2 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 bg-clip-text text-transparent sm:text-5xl">
             Nuestros Proyectos Destacados
           </h2>
-          <p className="mt-4 text-lg text-zinc-400 max-w-xl">
+          <p className="mt-4 text-lg text-zinc-300 max-w-xl font-light">
             Casos de éxito y plataformas digitales que hemos diseñado y desarrollado con precisión.
           </p>
         </div>
 
         {/* 2. SELECTOR DE PROYECTOS (Navegación tipo Tabs) */}
-        <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-8 border-b border-zinc-800/60 pb-4">
+        <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-8 border-b border-zinc-800/40 pb-4">
           {PROJECTS_DATA.map((project) => (
             <button
               key={project.id}
               onClick={() => setActiveProject(project)}
-              className={`px-5 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 ${
+              className={`px-5 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${
                 activeProject.id === project.id
-                  ? "bg-zinc-800 text-white shadow-lg border border-zinc-700"
+                  ? "bg-zinc-900/80 text-cyan-400 shadow-[0_4px_20px_rgba(0,0,0,0.4)] border border-zinc-800"
                   : "text-zinc-500 hover:text-zinc-300"
               }`}
             >
@@ -76,31 +76,31 @@ export default function Projects() {
           href={activeProject.href}
           target="_blank" 
           rel="noopener noreferrer"
-          className={`block group relative rounded-3xl bg-zinc-900/40 border border-zinc-800 p-8 md:p-12 transition-all duration-300 shadow-2xl backdrop-blur-sm cursor-pointer ${activeProject.borderColor}`}
+          className={`block group relative rounded-3xl bg-zinc-900/30 border border-zinc-800/80 p-8 md:p-12 transition-all duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-sm cursor-pointer ${activeProject.borderColor}`}
         >
-          {/* Key={activeProject.id} fuerza a React a recrear el nodo para que se note el cambio de contenido instantáneo o con CSS */}
+          {/* Key={activeProject.id} fuerza a React a recrear el nodo para que se note el cambio de contenido */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center" key={activeProject.id}>
             
             {/* Lado izquierdo: Textos del proyecto */}
             <div className="flex flex-col justify-center">
-              <h3 className={`text-3xl font-bold text-zinc-100 mb-4 transition-colors ${activeProject.accentColor}`}>
+              <h3 className={`text-3xl font-black text-zinc-100 mb-4 transition-colors tracking-tight ${activeProject.accentColor}`}>
                 {activeProject.title}
               </h3>
-              <p className="text-zinc-400 text-sm leading-relaxed mb-6 minimal-scrollbar">
+              <p className="text-zinc-300 text-sm leading-relaxed mb-6 font-light">
                 {activeProject.description}
               </p>
               
               {/* Etiquetas de tecnologías usadas */}
               <div className="flex flex-wrap gap-2 mb-8">
                 {activeProject.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 text-xs font-medium rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700">
+                  <span key={tag} className="px-3 py-1 text-xs font-semibold rounded-lg bg-zinc-900/80 text-zinc-400 border border-zinc-800/60">
                     {tag}
                   </span>
                 ))}
               </div>
 
               <div>
-                <span className={`inline-flex items-center text-sm font-semibold transition-transform duration-300 group-hover:translate-x-2 ${
+                <span className={`inline-flex items-center text-sm font-bold transition-transform duration-300 group-hover:translate-x-2 ${
                   activeProject.id === "itacate" ? "text-amber-400" : "text-cyan-400"
                 }`}>
                   Visitar sitio web →
@@ -109,12 +109,12 @@ export default function Projects() {
             </div>
 
             {/* Lado derecho: Espacio visual/Mockup */}
-            <div className="relative h-64 md:h-80 w-full rounded-2xl bg-gradient-to-br from-zinc-800/80 via-zinc-900 to-black border border-zinc-800 flex items-center justify-center overflow-hidden shadow-inner">
+            <div className="relative h-64 md:h-80 w-full rounded-2xl bg-gradient-to-br from-zinc-900/50 via-zinc-950 to-black border border-zinc-800/60 flex items-center justify-center overflow-hidden shadow-inner">
               <div className="text-center p-6">
-                <div className="text-5xl mb-3 opacity-50 group-hover:scale-110 transition-transform duration-300 ease-out">
+                <div className="text-5xl mb-3 opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-300 ease-out filter drop-shadow-lg">
                   {activeProject.emoji}
                 </div>
-                <p className="text-xs text-zinc-500 uppercase tracking-widest font-mono">
+                <p className="text-xs text-zinc-500 uppercase tracking-widest font-mono font-medium">
                   {activeProject.subtitle}
                 </p>
               </div>

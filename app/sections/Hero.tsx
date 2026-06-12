@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from "react";
 export default function Hero() {
   const [activeLink, setActiveLink] = useState("Inicio");
   const [isAssembled, setIsAssembled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false); // 👈 Estado para el menú móvil
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const navLinks = [
@@ -26,7 +27,6 @@ export default function Hero() {
     let cycleTimeout: NodeJS.Timeout;
     let isMobile = false;
 
-    // Configuración y dimensionamiento inteligente del Canvas
     const resizeCanvas = () => {
       const width = window.innerWidth;
       isMobile = width <= 640;
@@ -59,7 +59,6 @@ export default function Hero() {
         this.x = cWidth / 2 + Math.cos(this.angle) * this.radius;
         this.y = (cHeight * 0.4) + Math.sin(this.angle) * this.radius;
         
-        // Partículas ligeramente más pequeñas en móvil para mejorar nitidez
         this.size = isMobile ? (Math.random() * 2 + 0.6) : (Math.random() * 3.5 + 0.8);
         this.speed = Math.random() * 0.05 + 0.025;
         this.alpha = 0;
@@ -71,7 +70,6 @@ export default function Hero() {
         this.targetX = (cWidth / 2) + (Math.cos(t) * r * (cWidth * 0.22));
         this.targetY = (cHeight * 0.32) + (Math.sin(t) * r * (cHeight * 0.22)) * 1.1;
 
-        // Mayor porcentaje de partículas brillantes en móvil para compensar la falta de sombras
         const colors = isMobile 
           ? ["#ffffff", "#22d3ee", "#06b6d4", "#ffffff"] 
           : ["#22d3ee", "#06b6d4", "#0891b2", "#3b82f6", "#ffffff"];
@@ -79,7 +77,6 @@ export default function Hero() {
       }
 
       update(timeline: number, currentCanvas: HTMLCanvasElement) {
-        // Fase 1: Torbellino extendido en espiral (110 frames)
         if (timeline < 110) {
           this.angle += this.speed;
           this.radius -= (this.radius - 35) * 0.025;
@@ -87,14 +84,12 @@ export default function Hero() {
           this.y = (currentCanvas.height * 0.35) + Math.sin(this.angle) * this.radius;
           if (this.alpha < 1) this.alpha += 0.04;
         } 
-        // Fase 2: Magnetización veloz hacia el diamante
         else if (timeline >= 110 && timeline < 155) {
           const dx = this.targetX - this.x;
           const dy = this.targetY - this.y;
           this.x += dx * 0.14;
           this.y += dy * 0.14;
         } 
-        // Fase 3: Desvanecimiento óptico
         else {
           this.alpha -= 0.04;
         }
@@ -113,7 +108,6 @@ export default function Hero() {
         currentCtx.lineTo(this.x - this.size, this.y);
         currentCtx.closePath();
         
-        // 🔥 OPTIMIZACIÓN: Saltarse el renderizado de sombras pesadas si es pantalla móvil
         if (!isMobile) {
           currentCtx.shadowBlur = 12;
           currentCtx.shadowColor = "#06b6d4";
@@ -127,8 +121,6 @@ export default function Hero() {
     const initEffect = () => {
       setIsAssembled(false);
       particles = [];
-      
-      // 🔥 FILTRO: Carga balanceada de partículas según el dispositivo
       const totalParticles = isMobile ? 120 : 260;
       
       for (let i = 0; i < totalParticles; i++) {
@@ -177,7 +169,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="inicio" className="relative w-full h-screen bg-[#030303] text-white selection:bg-cyan-500 selection:text-black overflow-hidden flex flex-col justify-between">
+    <section id="inicio" className="relative w-full h-screen bg-[#0a0d14] text-white selection:bg-cyan-500 selection:text-black overflow-hidden flex flex-col justify-between">
       
       {/* 🔮 CAPAS DE FONDO DE ALTO CONTRASTE */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -185,19 +177,14 @@ export default function Hero() {
         <div className="absolute top-[35%] right-[10%] w-[550px] h-[550px] bg-cyan-400/15 rounded-full blur-[120px] pointer-events-none animate-pulse" />
         <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none" />
 
-        {/* Malla de Ingeniería de fondo */}
         <div className="absolute right-[5%] top-[25%] w-[500px] h-[500px] bg-[linear-gradient(to_right,#0c1a24_1px,transparent_1px),linear-gradient(to_bottom,#0c1a24_1px,transparent_1px)] bg-[size:30px_30px] opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-        {/* 💎 CONTENEDOR DE RENDERIZADO CON ACELERACIÓN POR HARDWARE (will-change-transform) */}
         <div className="absolute right-[-5%] sm:right-[5%] top-[22%] sm:top-[16%] w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] flex items-start justify-center pointer-events-none select-none will-change-transform">
-          
-          {/* Canvas dinámico */}
           <canvas 
             ref={canvasRef} 
             className="absolute inset-0 z-10 mix-blend-screen will-change-transform"
           />
 
-          {/* Imagen del Diamante */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img 
             src="../assets/images/logo.png" 
@@ -213,13 +200,10 @@ export default function Hero() {
             }
           />
         </div>
-
-        <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-zinc-900/40 to-transparent skew-x-12 blur-sm opacity-50" />
-        <div className="absolute bottom-0 right-0 w-96 h-48 bg-gradient-to-tr from-zinc-950 to-transparent -skew-y-12 opacity-80" />
       </div>
 
       {/* 🗺️ NAVBAR */}
-      <header className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-12 py-6 flex items-center justify-between">
+      <header className="relative z-30 w-full max-w-7xl mx-auto px-6 lg:px-12 py-6 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5 group">
           <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:scale-105 transition-transform">
             <span className="text-black text-lg font-black">💎</span>
@@ -229,6 +213,7 @@ export default function Hero() {
           </span>
         </Link>
 
+        {/* Menu Desktop */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
@@ -246,6 +231,40 @@ export default function Hero() {
           ))}
         </nav>
         
+        {/* 🍔 BOTÓN HAMBURGUESA INTERACTIVO MÓVIL */}
+        <button 
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          className="flex flex-col justify-center items-center md:hidden w-8 h-8 gap-1.5 z-40 relative focus:outline-none"
+          aria-label="Abrir menú"
+        >
+          <span className={`h-0.5 w-6 bg-white rounded-full transition-all duration-300 transform origin-center ${isMenuOpen ? "rotate-45 translate-y-2 bg-cyan-400" : ""}`} />
+          <span className={`h-0.5 w-6 bg-white rounded-full transition-all duration-200 ${isMenuOpen ? "opacity-0" : ""}`} />
+          <span className={`h-0.5 w-6 bg-white rounded-full transition-all duration-300 transform origin-center ${isMenuOpen ? "-rotate-45 -translate-y-2 bg-cyan-400" : ""}`} />
+        </button>
+
+        {/* 📱 MENÚ DESPLEGABLE MÓVIL */}
+        <div className={`fixed inset-0 bg-[#0a0d14]/98 backdrop-blur-xl z-30 flex flex-col justify-center items-center transition-all duration-300 md:hidden ${
+          isMenuOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
+        }`}>
+          <nav className="flex flex-col items-center gap-6 text-center">
+            {navLinks.map((link) => (
+              <Link
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={() => {
+                  setActiveLink(link.name);
+                  setIsMenuOpen(false); // Cierra el menú al hacer clic
+                }}
+                className={`text-2xl font-bold tracking-wider transition-colors ${
+                  activeLink === link.name ? "text-cyan-400" : "text-zinc-400 hover:text-white"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
         <div className="hidden md:block w-32 text-right"></div>
       </header>
 
@@ -258,7 +277,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="mt-2 text-base sm:text-lg text-zinc-400 max-w-xl leading-relaxed mb-10 font-medium">
+        <p className="mt-2 text-base sm:text-lg text-zinc-300 max-w-xl leading-relaxed mb-10 font-medium">
           En DiamondCode, pulimos cada línea de código para transformarla en soluciones digitales potentes, eficientes y exclusivas que impulsan el crecimiento de tu negocio o startup.
         </p>
 
