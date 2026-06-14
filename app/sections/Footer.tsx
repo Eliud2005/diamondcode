@@ -82,7 +82,14 @@ export default function Footer() {
               &copy; {new Date().getFullYear()} DiamondCode. Todos los derechos reservados.
             </p>
             <span className="hidden sm:inline text-zinc-800">|</span>
-            
+         
+          </div>
+          
+          <div className="flex gap-6 font-medium">
+            <Link href="/privacy" className="hover:text-zinc-300 transition-colors duration-200">Aviso de Privacidad</Link>
+            <Link href="/terms" className="hover:text-zinc-300 transition-colors duration-200">Términos de Servicio</Link>
+          </div>
+             
             {/* 💎 EFECTO DE DIAMANTE GIRATORIO INTEGRADO */}
             <p className="flex items-center gap-1.5 text-zinc-400 font-medium">
               Hecho con{" "}
@@ -94,12 +101,6 @@ export default function Footer() {
                 DiamondCode
               </span>
             </p>
-          </div>
-          
-          <div className="flex gap-6 font-medium">
-            <Link href="/privacy" className="hover:text-zinc-300 transition-colors duration-200">Aviso de Privacidad</Link>
-            <Link href="/terms" className="hover:text-zinc-300 transition-colors duration-200">Términos de Servicio</Link>
-          </div>
         </div>
 
       </div>
