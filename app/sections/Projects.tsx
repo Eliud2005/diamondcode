@@ -22,7 +22,7 @@ const PROJECTS_DATA = [
     title: "Itacate",
     description: "Diseño y desarrollo de una plataforma web premium para servicios de banquetería y experiencias gastronómicas privadas. Optimizamos la reserva de menús, la gestión de eventos y la presentación del catálogo de alta cocina del chef.",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
-    href: "#", // Cambiar por el link real
+    href: "https://www.itacate.it.com/", // Cambiar por el link real
     emoji: "🍲👨‍🍳",
     subtitle: "Web de Servicios & Banquetes",
     accentColor: "group-hover:text-amber-400",
