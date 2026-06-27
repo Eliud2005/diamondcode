@@ -1,130 +1,249 @@
-"use client"; // 👈 Agregamos esto al inicio para poder usar useState
+"use client";
 
 import { useState } from "react";
-import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
-// 1. Definimos la estructura de datos de los proyectos para escalarlo fácilmente
 const PROJECTS_DATA = [
   {
-    id: "nube-serpiente",
-    title: "Nube Serpiente",
-    description: "Desarrollamos la plataforma web oficial para este innovador centro deportivo y cultural. Diseñamos una experiencia digital fluida que conecta a la comunidad, facilitando la difusión de eventos culturales y la gestión de actividades deportivas en un solo lugar.",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript"],
-    href: "#", // Cambiar por el link real
-    emoji: "☁️🐍",
-    subtitle: "Plataforma Digital Web",
-    accentColor: "group-hover:text-cyan-400",
-    glowColor: "group-hover:bg-cyan-500/20",
-    borderColor: "hover:border-cyan-500/50"
-  },
-  {
-    id: "itacate",
+    id: "01",
     title: "Itacate",
+    subtitle: "Web de Servicios & Banquetes",
     description: "Diseño y desarrollo de una plataforma web premium para servicios de banquetería y experiencias gastronómicas privadas. Optimizamos la reserva de menús, la gestión de eventos y la presentación del catálogo de alta cocina del chef.",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
-    href: "https://www.itacate.it.com/", // Cambiar por el link real
+    href: "https://www.itacate.it.com/", 
+    image: "/assets/images/project1.jpeg", // Muestra SOLO la imagen limpia
+    isComingSoon: false,
+    year: "2024",
     emoji: "🍲👨‍🍳",
-    subtitle: "Web de Servicios & Banquetes",
-    accentColor: "group-hover:text-amber-400",
-    glowColor: "group-hover:bg-amber-500/20",
-    borderColor: "hover:border-amber-500/50"
-  }
+    glowColor: "rgba(245,158,11,0.03)" 
+  },
+  {
+    id: "02",
+    title: "Nube Serpiente",
+    subtitle: "Plataforma Digital Web",
+    description: "Desarrollamos la plataforma web oficial para este innovador centro deportivo y cultural. Diseñamos una experiencia digital fluida que conecta a la comunidad, facilitando la difusión de eventos culturales y la gestión de actividades deportivas en un solo lugar.",
+    tags: ["Next.js", "Tailwind CSS", "TypeScript"],
+    href: "#", 
+    image: "", // Al estar vacío, mostrará el emoji como respaldo
+    isComingSoon: true,
+    year: "2024",
+    emoji: "☁️🐍",
+    glowColor: "rgba(6,182,212,0.03)" 
+  },
 ];
 
 export default function Projects() {
-  // Estado para controlar qué proyecto se está mostrando
-  const [activeProject, setActiveProject] = useState(PROJECTS_DATA[0]);
+  const [activeProject, setActiveProject] = useState(0);
+  const currentProject = PROJECTS_DATA[activeProject];
 
   return (
-    <section id="projects" className="py-24 bg-gradient-to-b from-[#06080f] via-[#0c1120] to-[#06080f] text-white border-t border-zinc-900 relative overflow-hidden">
-      
-      {/* 💡 ILUMINACIÓN DE ESTUDIO PREMIUM (CIAN Y INDIGO) */}
-      <div className="absolute -top-[10%] left-0 w-[500px] h-[500px] bg-cyan-500/[0.08] rounded-full blur-[130px] pointer-events-none z-0" />
-      <div className="absolute -bottom-[10%] right-0 w-[500px] h-[500px] bg-blue-600/[0.08] rounded-full blur-[130px] pointer-events-none z-0" />
-
-      <div className="container mx-auto px-6 max-w-5xl relative z-10">
+    <section id="projects" className="py-32 md:py-40 border-t border-border bg-background text-foreground">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
         
-        {/* Cabecera de la sección */}
-        <div className="mb-12 text-center md:text-left">
-          <h2 className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-cyan-400 via-cyan-500 to-blue-500 bg-clip-text text-transparent sm:text-5xl">
-            Nuestros Proyectos Destacados
-          </h2>
-          <p className="mt-4 text-lg text-zinc-300 max-w-xl font-light">
-            Casos de éxito y plataformas digitales que hemos diseñado y desarrollado con precisión.
-          </p>
-        </div>
-
-        {/* 2. SELECTOR DE PROYECTOS (Navegación tipo Tabs) */}
-        <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-8 border-b border-zinc-800/40 pb-4">
-          {PROJECTS_DATA.map((project) => (
-            <button
-              key={project.id}
-              onClick={() => setActiveProject(project)}
-              className={`px-5 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 ${
-                activeProject.id === project.id
-                  ? "bg-zinc-900/80 text-cyan-400 shadow-[0_4px_20px_rgba(0,0,0,0.4)] border border-zinc-800"
-                  : "text-zinc-500 hover:text-zinc-300"
-              }`}
+        {/* Cabecera */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-8 bg-primary" />
+              <span className="text-xs tracking-[0.25em] uppercase text-primary" style={{ fontFamily: "'DM Mono', monospace" }}>
+                Proyectos
+              </span>
+            </div>
+            <h2
+              className="text-4xl md:text-6xl leading-tight text-foreground"
+              style={{ fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400 }}
             >
-              {project.title}
-            </button>
-          ))}
+              Trabajo
+              <br />
+              destacado.
+            </h2>
+          </div>
+
+          {/* Indicadores de paginación */}
+          <div className="flex gap-2">
+            {PROJECTS_DATA.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveProject(i)}
+                className="transition-all duration-300 cursor-pointer"
+                style={{
+                  width: activeProject === i ? "32px" : "8px",
+                  height: "8px",
+                  background: activeProject === i ? "var(--primary)" : "var(--border)",
+                }}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* 3. TARJETA DINÁMICA COMO LINK COMPLETO */}
-        <Link 
-          href={activeProject.href}
-          target="_blank" 
-          rel="noopener noreferrer"
-          className={`block group relative rounded-3xl bg-zinc-900/30 border border-zinc-800/80 p-8 md:p-12 transition-all duration-300 shadow-[0_20px_50px_rgba(0,0,0,0.5)] backdrop-blur-sm cursor-pointer ${activeProject.borderColor}`}
-        >
-          {/* Key={activeProject.id} fuerza a React a recrear el nodo para que se note el cambio de contenido */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center" key={activeProject.id}>
-            
-            {/* Lado izquierdo: Textos del proyecto */}
-            <div className="flex flex-col justify-center">
-              <h3 className={`text-3xl font-black text-zinc-100 mb-4 transition-colors tracking-tight ${activeProject.accentColor}`}>
-                {activeProject.title}
+        {/* Tarjeta Destacada */}
+        <div className="grid md:grid-cols-12 gap-px bg-border mb-px border border-border">
+          
+          {/* Lado Izquierdo: Visualizador Inteligente */}
+          <div 
+            className="md:col-span-7 relative overflow-hidden bg-black flex items-center justify-center min-h-[320px] md:min-h-[450px] group"
+            style={{ aspectRatio: "16/10" }}
+          >
+            {/* Renderizado de imágenes (Solo si están definidas en el objeto) */}
+            {PROJECTS_DATA.map((project, idx) => (
+              project.image && (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={project.id}
+                  src={project.image}
+                  alt={project.title}
+                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-102
+                    ${activeProject === idx ? "opacity-100 visible" : "opacity-0 invisible"}`}
+                />
+              )
+            ))}
+
+            {/* MODO RESPALDO: Si el proyecto activo NO tiene imagen, renderiza el emoji */}
+            {!currentProject.image ? (
+              <div className="text-center z-20 animate-fade-in px-6 select-none">
+                <div className="text-6xl md:text-7xl mb-3 filter drop-shadow-[0_10px_20px_rgba(0,0,0,0.8)]">
+                  {currentProject.emoji}
+                </div>
+                <p 
+                  className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-mono"
+                  style={{ fontFamily: "'DM Mono', monospace" }}
+                >
+                  Vista previa no disponible
+                </p>
+              </div>
+            ) : null}
+
+            {/* Malla estructural estética (Solo visible en modo Emoji para dar textura de estudio) */}
+            {!currentProject.image && (
+              <div className="absolute inset-0 opacity-[0.02] pointer-events-none z-10">
+                <svg width="100%" height="100%">
+                  <pattern id="card-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <rect width="40" height="40" fill="none" stroke="currentColor" strokeWidth="1" />
+                  </pattern>
+                  <rect width="100%" height="100%" fill="url(#card-grid)" />
+                </svg>
+              </div>
+            )}
+
+            {/* Atmósfera lumínica sutil de fondo */}
+            <div 
+              className="absolute inset-0 transition-all duration-700 pointer-events-none z-10"
+              style={{
+                background: `radial-gradient(circle at 50% 50%, ${currentProject.glowColor} 0%, transparent 70%)`
+              }}
+            />
+          </div>
+
+          {/* Lado Derecho: Textos e Información */}
+          <div className="md:col-span-5 bg-black p-10 md:p-12 flex flex-col justify-between">
+            <div>
+              <div
+                className="text-xs tracking-[0.2em] uppercase text-zinc-500 mb-6"
+                style={{ fontFamily: "'DM Mono', monospace" }}
+              >
+                {currentProject.id} — {currentProject.year}
+              </div>
+              
+              <h3
+                className="text-3xl md:text-4xl text-white mb-2 leading-tight tracking-tight"
+                style={{ fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400 }}
+              >
+                {currentProject.title}
               </h3>
-              <p className="text-zinc-300 text-sm leading-relaxed mb-6 font-light">
-                {activeProject.description}
+
+              <p 
+                className="text-[11px] uppercase tracking-[0.15em] text-cyan-400 mb-6"
+                style={{ fontFamily: "'DM Mono', monospace" }}
+              >
+                {currentProject.subtitle}
               </p>
               
-              {/* Etiquetas de tecnologías usadas */}
-              <div className="flex flex-wrap gap-2 mb-8">
-                {activeProject.tags.map((tag) => (
-                  <span key={tag} className="px-3 py-1 text-xs font-semibold rounded-lg bg-zinc-900/80 text-zinc-400 border border-zinc-800/60">
+              <p className="text-zinc-400 text-sm leading-relaxed mb-8 font-light">
+                {currentProject.description}
+              </p>
+
+              {/* Tags */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {currentProject.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[10px] px-2.5 py-1 border border-zinc-900 text-zinc-400 bg-zinc-950"
+                    style={{ fontFamily: "'DM Mono', monospace" }}
+                  >
                     {tag}
                   </span>
                 ))}
               </div>
-
-              <div>
-                <span className={`inline-flex items-center text-sm font-bold transition-transform duration-300 group-hover:translate-x-2 ${
-                  activeProject.id === "itacate" ? "text-amber-400" : "text-cyan-400"
-                }`}>
-                  Visitar sitio web →
-                </span>
-              </div>
             </div>
 
-            {/* Lado derecho: Espacio visual/Mockup */}
-            <div className="relative h-64 md:h-80 w-full rounded-2xl bg-gradient-to-br from-zinc-900/50 via-zinc-950 to-black border border-zinc-800/60 flex items-center justify-center overflow-hidden shadow-inner">
-              <div className="text-center p-6">
-                <div className="text-5xl mb-3 opacity-60 group-hover:scale-110 group-hover:opacity-100 transition-all duration-300 ease-out filter drop-shadow-lg">
-                  {activeProject.emoji}
+            {/* Acciones */}
+            <div className="mt-8">
+              {currentProject.isComingSoon ? (
+                <span 
+                  className="inline-block text-[10px] tracking-widest uppercase text-zinc-600 px-4 py-2 border border-dashed border-zinc-900"
+                  style={{ fontFamily: "'DM Mono', monospace" }}
+                >
+                  ⏳ Próximamente
+                </span>
+              ) : (
+                <a
+                  href={currentProject.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-xs text-cyan-400 hover:text-white transition-colors duration-200 group"
+                  style={{ fontFamily: "'DM Mono', monospace" }}
+                >
+                  <span className="tracking-wider uppercase">
+                    Visitar sitio web
+                  </span>
+                  <ExternalLink size={12} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" />
+                </a>
+              )}
+            </div>
+          </div>
+
+        </div>
+
+        {/* Pestañas Inferiores de Navegación */}
+        <div className="grid grid-cols-2 gap-px bg-border border-x border-b border-border">
+          {PROJECTS_DATA.map((p, i) => (
+            <button
+              key={p.id}
+              onClick={() => setActiveProject(i)}
+              className="bg-black p-6 text-left relative group transition-colors duration-300 hover:bg-zinc-950 cursor-pointer"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-1">
+                  <span 
+                    className="block text-[10px] tracking-widest uppercase text-zinc-600" 
+                    style={{ fontFamily: "'DM Mono', monospace" }}
+                  >
+                    {p.id}
+                  </span>
+                  <p 
+                    className={`text-base transition-colors duration-300 ${
+                      activeProject === i ? "text-cyan-400" : "text-zinc-400 group-hover:text-white"
+                    }`}
+                    style={{ fontFamily: "'Tenor Sans', sans-serif" }}
+                  >
+                    {p.title}
+                  </p>
                 </div>
-                <p className="text-xs text-zinc-500 uppercase tracking-widest font-mono font-medium">
-                  {activeProject.subtitle}
-                </p>
+
+                {/* En las pestañas inferiores también respeta la regla: si NO tiene imagen, muestra el emoji pequeño a la derecha */}
+                {!p.image && (
+                  <span className="text-lg opacity-40 group-hover:opacity-100 transition-opacity select-none">
+                    {p.emoji}
+                  </span>
+                )}
               </div>
               
-              {/* Destello de fondo decorativo dinámico */}
-              <div className={`absolute -right-10 -bottom-10 w-40 h-40 bg-transparent rounded-full blur-3xl transition-all duration-300 ${activeProject.glowColor}`}></div>
-            </div>
-
-          </div>
-        </Link>
+              {activeProject === i && (
+                <div className="absolute top-0 left-0 right-0 h-0.5 bg-cyan-400" />
+              )}
+            </button>
+          ))}
+        </div>
 
       </div>
     </section>

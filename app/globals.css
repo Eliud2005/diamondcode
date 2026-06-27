@@ -1,26 +1,101 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* 💎 CONFIGURACIÓN POR DEFECTO: ULTRA PREMIUM DARK (Pure Black) */
+  --background: #000000;
+  --foreground: #ffffff;
+  
+  /* Sistema Axial (Bordes de 1px de precisión quirúrgica) */
+  --border: #18181b; /* zinc-900 */
+  --card: #000000;
+  --card-foreground: #e4e4e7; /* zinc-200 */
+  
+  /* Acentuaciones de Marca */
+  --primary: #22d3ee; /* cyan-400 */
+  --primary-foreground: #000000;
+  --muted: #09090b;
+  --muted-foreground: #71717a; /* zinc-500 */
+  --ring: rgba(34, 211, 238, 0.2);
+
+  /* Geometría pura a 90 grados (Efecto Estudio Minimalista) */
+  --radius: 0rem;
+
+  /* Variables del Sistema */
+  --font-tenor: 'Tenor Sans', sans-serif;
+  --font-dm-mono: 'DM Mono', monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
+/* Mantenemos tu bloque multimedia por si necesitas control dinámico, 
+   pero forzando el modo oscuro OLED absoluto */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #ffffff;
+    --border: #18181b;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 🗺️ EXTENSIÓN DEL TEMA EN TAILWIND v4 */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-ring: var(--ring);
+  
+  /* Radios ortogonales heredados */
+  --radius-sm: var(--radius);
+  --radius-md: var(--radius);
+  --radius-lg: var(--radius);
+  
+  /* Inyección de tus fuentes de marca para usarlas como 'font-sans' y 'font-mono' */
+  --font-sans: var(--font-tenor);
+  --font-mono: var(--font-dm-mono);
+}
+
+/* 📐 CAPA BASE DE ESTILOS GLOBO */
+@layer base {
+  * {
+    /* Aplica tus bordes de precisión por defecto en toda la app */
+    border-color: var(--border);
+    outline-color: var(--ring);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-tenor);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Aseguramos proporciones tipográficas de alta gama */
+  h1 {
+    font-size: var(--text-5xl);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+  }
+
+  h2 {
+    font-size: var(--text-3xl);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  /* Los botones y elementos técnicos usarán la tipografía Mono por defecto */
+  button, label {
+    font-family: var(--font-dm-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.15em;
+  }
 }

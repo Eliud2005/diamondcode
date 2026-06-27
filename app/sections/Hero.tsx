@@ -6,12 +6,12 @@ import { useState, useEffect, useRef } from "react";
 export default function Hero() {
   const [activeLink, setActiveLink] = useState("Inicio");
   const [isAssembled, setIsAssembled] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // 👈 Estado para el menú móvil
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const navLinks = [
     { name: "Inicio", id: "inicio" },
-    { name: "Servicios", id: "services" },
+    { name: "Servicios", id: "servicios" }, // Ajustado al id corporativo correcto
     { name: "Proyectos", id: "projects" },
     { name: "Contacto", id: "contact" },
   ];
@@ -169,15 +169,16 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="inicio" className="relative w-full h-screen bg-[#0a0d14] text-white selection:bg-cyan-500 selection:text-black overflow-hidden flex flex-col justify-between">
+    <section id="inicio" className="relative w-full h-screen bg-black text-white selection:bg-cyan-500 selection:text-black overflow-hidden flex flex-col justify-between">
       
-      {/* 🔮 CAPAS DE FONDO DE ALTO CONTRASTE */}
+      {/* 🔮 ILUMINACIONES DE ESTUDIO AJUSTADAS PARA NEGRO PURO */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute top-[30%] left-[10%] w-[450px] h-[450px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-[35%] right-[10%] w-[550px] h-[550px] bg-cyan-400/15 rounded-full blur-[120px] pointer-events-none animate-pulse" />
-        <div className="absolute bottom-[10%] right-[5%] w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[130px] pointer-events-none" />
+        <div className="absolute top-[25%] left-[5%] w-[450px] h-[450px] bg-cyan-500/[0.02] rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-[30%] right-[10%] w-[550px] h-[550px] bg-cyan-400/[0.03] rounded-full blur-[120px] pointer-events-none animate-pulse" />
+        <div className="absolute bottom-[5%] right-[5%] w-[400px] h-[400px] bg-indigo-600/[0.02] rounded-full blur-[130px] pointer-events-none" />
 
-        <div className="absolute right-[5%] top-[25%] w-[500px] h-[500px] bg-[linear-gradient(to_right,#0c1a24_1px,transparent_1px),linear-gradient(to_bottom,#0c1a24_1px,transparent_1px)] bg-[size:30px_30px] opacity-40 [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+        {/* Malla de diseño estructural axial sutil */}
+        <div className="absolute right-[5%] top-[25%] w-[500px] h-[500px] bg-[linear-gradient(to_right,#1f2937_1px,transparent_1px),linear-gradient(to_bottom,#1f2937_1px,transparent_1px)] bg-[size:40px_40px] opacity-[0.07] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
         <div className="absolute right-[-5%] sm:right-[5%] top-[22%] sm:top-[16%] w-[350px] sm:w-[700px] h-[350px] sm:h-[700px] flex items-start justify-center pointer-events-none select-none will-change-transform">
           <canvas 
@@ -191,7 +192,7 @@ export default function Hero() {
             alt="Diamond Render" 
             className={`w-full h-auto object-contain transition-all duration-700 ease-out will-change-transform 
               ${isAssembled 
-                ? "opacity-100 scale-100 blur-0 drop-shadow-[0_0_50px_rgba(6,182,212,0.45)] animate-[bounce_6s_infinite]" 
+                ? "opacity-100 scale-100 blur-0 drop-shadow-[0_0_50px_rgba(6,182,212,0.15)] animate-[bounce_6s_infinite]" 
                 : "opacity-0 scale-95 blur-md drop-shadow-[0_0_0px_rgba(0,0,0,0)]"
               }
               mix-blend-screen 
@@ -202,29 +203,30 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* 🗺️ NAVBAR */}
-      <header className="relative z-30 w-full max-w-7xl mx-auto px-6 lg:px-12 py-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center shadow-[0_0_15px_rgba(255,255,255,0.1)] group-hover:scale-105 transition-transform">
-            <span className="text-black text-lg font-black">💎</span>
-          </div>
-          <span className="text-xl font-black tracking-tight text-white">
-            Diamond<span className="text-zinc-400 font-medium">Code</span>
+      {/* 🗺️ NAVBAR PREMIUM INTEGRADO A LOS EJES */}
+      <header className="relative z-30 w-full max-w-7xl mx-auto px-6 md:px-12 py-8 flex items-center justify-between border-b border-zinc-900/30">
+        <Link href="/" className="flex items-center gap-3 group">
+          <span 
+            className="text-lg text-white tracking-tight"
+            style={{ fontFamily: "'Tenor Sans', sans-serif" }}
+          >
+            Diamond<span className="text-cyan-400 font-light">Code</span>
           </span>
         </Link>
 
-        {/* Menu Desktop */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Menú Desktop de Línea Fina */}
+        <nav className="hidden md:flex items-center gap-8 bg-zinc-950/20 border border-zinc-900/60 px-8 py-2.5 rounded-none backdrop-blur-md">
           {navLinks.map((link) => (
             <Link
               key={link.id}
               href={`#${link.id}`}
               onClick={() => setActiveLink(link.name)}
-              className={`text-sm font-semibold tracking-wide transition-all duration-200 py-1 border-b-2 ${
+              className={`text-[10px] tracking-[0.2em] uppercase transition-colors duration-200 py-1 ${
                 activeLink === link.name
-                  ? "text-cyan-400 border-cyan-400"
-                  : "text-zinc-400 border-transparent hover:text-white"
+                  ? "text-cyan-400"
+                  : "text-zinc-500 hover:text-zinc-300"
               }`}
+              style={{ fontFamily: "'DM Mono', monospace" }}
             >
               {link.name}
             </Link>
@@ -237,27 +239,28 @@ export default function Hero() {
           className="flex flex-col justify-center items-center md:hidden w-8 h-8 gap-1.5 z-40 relative focus:outline-none"
           aria-label="Abrir menú"
         >
-          <span className={`h-0.5 w-6 bg-white rounded-full transition-all duration-300 transform origin-center ${isMenuOpen ? "rotate-45 translate-y-2 bg-cyan-400" : ""}`} />
-          <span className={`h-0.5 w-6 bg-white rounded-full transition-all duration-200 ${isMenuOpen ? "opacity-0" : ""}`} />
-          <span className={`h-0.5 w-6 bg-white rounded-full transition-all duration-300 transform origin-center ${isMenuOpen ? "-rotate-45 -translate-y-2 bg-cyan-400" : ""}`} />
+          <span className={`h-0.5 w-6 bg-white transition-all duration-300 transform origin-center ${isMenuOpen ? "rotate-45 translate-y-2 bg-cyan-400" : ""}`} />
+          <span className={`h-0.5 w-6 bg-white transition-all duration-200 ${isMenuOpen ? "opacity-0" : ""}`} />
+          <span className={`h-0.5 w-6 bg-white transition-all duration-300 transform origin-center ${isMenuOpen ? "-rotate-45 -translate-y-2 bg-cyan-400" : ""}`} />
         </button>
 
-        {/* 📱 MENÚ DESPLEGABLE MÓVIL */}
-        <div className={`fixed inset-0 bg-[#0a0d14]/98 backdrop-blur-xl z-30 flex flex-col justify-center items-center transition-all duration-300 md:hidden ${
+        {/* 📱 MENÚ DESPLEGABLE MÓVIL PURE BLACK */}
+        <div className={`fixed inset-0 bg-black z-30 flex flex-col justify-center items-center transition-all duration-300 md:hidden ${
           isMenuOpen ? "opacity-100 visible pointer-events-auto" : "opacity-0 invisible pointer-events-none"
         }`}>
-          <nav className="flex flex-col items-center gap-6 text-center">
+          <nav className="flex flex-col items-center gap-8 text-center">
             {navLinks.map((link) => (
               <Link
                 key={link.id}
                 href={`#${link.id}`}
                 onClick={() => {
                   setActiveLink(link.name);
-                  setIsMenuOpen(false); // Cierra el menú al hacer clic
+                  setIsMenuOpen(false);
                 }}
-                className={`text-2xl font-bold tracking-wider transition-colors ${
-                  activeLink === link.name ? "text-cyan-400" : "text-zinc-400 hover:text-white"
+                className={`text-xl tracking-[0.2em] uppercase transition-colors ${
+                  activeLink === link.name ? "text-cyan-400" : "text-zinc-600 hover:text-white"
                 }`}
+                style={{ fontFamily: "'DM Mono', monospace" }}
               >
                 {link.name}
               </Link>
@@ -265,33 +268,49 @@ export default function Hero() {
           </nav>
         </div>
 
-        <div className="hidden md:block w-32 text-right"></div>
+        <div className="hidden md:block w-24 text-right"></div>
       </header>
 
-      {/* 📝 TEXTO PRINCIPAL */}
-      <div className="relative z-10 container mx-auto px-6 lg:px-12 max-w-7xl w-full flex-grow flex flex-col justify-center items-start text-left mb-16">
-        <h1 className="text-5xl font-black tracking-tight sm:text-7xl leading-[1.05] max-w-3xl mb-6">
-          <span className="block text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]">Código tan valioso</span>
-          <span className="inline-block mt-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500 bg-clip-text text-transparent px-4 py-2 bg-cyan-950/30 rounded-xl border border-cyan-500/10 shadow-inner">
-            como un diamante
+      {/* 📝 TEXTO PRINCIPAL DE COMPOSICIÓN ASIMÉTRICA */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 w-full flex-grow flex flex-col justify-center items-start text-left mb-24">
+        
+        <div className="flex items-center gap-3 mb-6">
+          <div className="h-px w-8 bg-cyan-500/50" />
+          <span className="text-xs tracking-[0.25em] uppercase text-cyan-400" style={{ fontFamily: "'DM Mono', monospace" }}>
+            Desarrollo web
           </span>
+        </div>
+
+        <h1 
+          className="text-4xl sm:text-6xl md:text-7xl leading-[1.1] text-white tracking-tight max-w-4xl mb-8"
+          style={{ fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400 }}
+        >
+          Código tan valioso
+          <br />
+          como un diamante.
         </h1>
 
-        <p className="mt-2 text-base sm:text-lg text-zinc-300 max-w-xl leading-relaxed mb-10 font-medium">
-          En DiamondCode, pulimos cada línea de código para transformarla en soluciones digitales potentes, eficientes y exclusivas que impulsan el crecimiento de tu negocio o startup.
+        <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-xl mb-12 font-light">
+          Pulimos cada línea de desarrollo para transformarla en productos digitales potentes, eficientes y de interfaz ultra-premium que escalan tu negocio bajo estándares de precisión matemática.
         </p>
 
+        {/* Botones Tipo Estudio (Bordes limpios y tipografía mono, sin curvas toscas) */}
         <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
           <Link 
             href="#projects" 
-            className="w-full sm:w-auto rounded-full bg-gradient-to-r from-cyan-400 to-cyan-500 px-8 py-4 font-bold text-black hover:from-cyan-300 hover:to-cyan-400 transition-all duration-300 shadow-[0_0_30px_rgba(6,182,212,0.35)] hover:shadow-[0_0_40px_rgba(6,182,212,0.5)] group text-center text-sm tracking-wide"
+            className="w-full sm:w-auto border border-zinc-800 hover:border-cyan-400 bg-zinc-950 text-white px-8 py-4 text-xs tracking-[0.2em] uppercase transition-all duration-300 group text-center"
+            style={{ fontFamily: "'DM Mono', monospace" }}
           >
-            Nube Serpiente: Nuestro Primer Proyecto <span className="inline-block group-hover:translate-x-1 transition-transform duration-200">→</span>
+            Proyectos{" "}
+            <span className="inline-block group-hover:translate-x-1 transition-transform duration-200 text-cyan-400">
+              →
+            </span>
           </Link>
           
           <Link 
             href="#contact" 
-            className="w-full sm:w-auto rounded-full bg-black/40 border-2 border-zinc-700 hover:border-white px-8 py-3.5 font-bold text-zinc-300 hover:text-white transition-all duration-200 text-center text-sm tracking-wide bg-blend-soft-light backdrop-blur-sm"
+            className="w-full sm:w-auto border border-transparent hover:border-zinc-900 bg-black text-zinc-500 hover:text-white px-8 py-4 text-xs tracking-[0.2em] uppercase transition-all duration-200 text-center"
+            style={{ fontFamily: "'DM Mono', monospace" }}
           >
             Hablemos de tu idea
           </Link>
