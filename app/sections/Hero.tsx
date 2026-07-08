@@ -296,6 +296,14 @@ export default function Hero() {
 
         {/* Botones Tipo Estudio (Bordes limpios y tipografía mono, sin curvas toscas) */}
         <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+            {/* NUEVO BOTÓN GANCHO DE EDUCACIÓN */}
+<Link 
+  href="/company/que_gano" 
+  className="w-full sm:w-auto border border-cyan-500/40 hover:border-cyan-400 bg-cyan-950/10 text-cyan-400 px-8 py-4 text-xs tracking-[0.2em] uppercase transition-all duration-300 text-center shadow-[0_0_25px_rgba(6,182,212,0.05)]"
+  style={{ fontFamily: "'DM Mono', monospace" }}
+>
+  ¿Por qué tu negocio necesita una web?
+</Link>
           <Link 
             href="#projects" 
             className="w-full sm:w-auto border border-zinc-800 hover:border-cyan-400 bg-zinc-950 text-white px-8 py-4 text-xs tracking-[0.2em] uppercase transition-all duration-300 group text-center"
@@ -316,6 +324,8 @@ export default function Hero() {
           </Link>
         </div>
       </div>
+      {/* Botones Tipo Estudio (Bordes limpios y tipografía mono, sin curvas toscas) */}
+
     </section>
   );
 }
