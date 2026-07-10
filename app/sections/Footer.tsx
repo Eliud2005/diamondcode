@@ -10,6 +10,8 @@ const COMPANY_LINKS = [
 
 const SOCIAL_LINKS = [
   { name: "LinkedIn // ↗", href: "https://linkedin.com/in/eliudgh" },
+  { name: "Instagram // ↗", href: "https://www.instagram.com/diamondcodemx" },
+  { name: "TikTok // ↗", href: "https://www.tiktok.com/@diamondcodemx" },
 ];
 
 export default function Footer() {
