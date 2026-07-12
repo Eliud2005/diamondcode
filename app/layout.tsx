@@ -17,6 +17,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "DiamondCode",
   description: "Diseño y arquitectura de sistemas digitales robustos y soluciones tecnológicas a medida para empresas y startups.",
+  // 👇 AGREGA ESTO AQUÍ PARA REPARAR EL ERROR DE GOOGLE
+  alternates: {
+    canonical: "https://diamondcode.mx",
+  },
 };
 
 export default function RootLayout({
