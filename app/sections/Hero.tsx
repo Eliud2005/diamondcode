@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { MessageSquare } from "lucide-react";
 import Chatbot from "../components/Chatbot";
@@ -224,15 +225,25 @@ export default function Hero() {
 
       {/* 🗺️ NAVBAR */}
       <header className="relative z-30 w-full max-w-7xl mx-auto px-6 md:px-12 py-8 flex items-center justify-between border-b border-zinc-900/30">
-        <Link href="/" className="flex items-center gap-3 group">
-          <span 
-            className="text-lg text-white tracking-tight"
-            style={{ fontFamily: "'Tenor Sans', sans-serif" }}
-          >
-            Diamond<span className="text-cyan-400 font-light">Code</span>
-          </span>
-        </Link>
+     <Link href="/" className="flex items-center gap-3 group">
+  {/* Contenedor del isotipo para controlar dimensiones exactas */}
+  <div className="relative w-8 h-8 flex-shrink-0">
+    <Image
+      src="/../assets/images/isotipo.png" // Cambia por la ruta de tu archivo
+      alt="DiamondCode Isotipo"
+      fill
+      className="object-contain"
+    />
+  </div>
 
+{/* Texto con la fuente y color blanco */}
+  <span 
+    className="text-lg text-white tracking-tight"
+    style={{ fontFamily: "'Bluter', sans-serif" }}
+  >
+    DiamondCode
+  </span>
+</Link>
         {/* Menú Desktop */}
         <nav className="hidden md:flex items-center gap-8 bg-zinc-950/20 border border-zinc-900/60 px-8 py-2.5 rounded-none backdrop-blur-md">
           {navLinks.map((link) => (

@@ -11,7 +11,7 @@ const PROJECTS_DATA = [
     description: "Diseño y desarrollo de una plataforma web premium para servicios de banquetería y experiencias gastronómicas privadas. Optimizamos la reserva de menús, la gestión de eventos y la presentación del catálogo de alta cocina del chef.",
     tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
     href: "https://www.itacate.it.com/", 
-    image: "/assets/images/project1.jpeg", // Muestra SOLO la imagen limpia
+    image: "/assets/images/project1.jpeg",
     isComingSoon: false,
     year: "2024",
     emoji: "🍲👨‍🍳",
@@ -24,7 +24,7 @@ const PROJECTS_DATA = [
     description: "Desarrollamos la plataforma web oficial para este innovador centro deportivo y cultural. Diseñamos una experiencia digital fluida que conecta a la comunidad, facilitando la difusión de eventos culturales y la gestión de actividades deportivas en un solo lugar.",
     tags: ["Next.js", "Tailwind CSS", "TypeScript"],
     href: "#", 
-    image: "", // Al estar vacío, mostrará el emoji como respaldo
+    image: "", 
     isComingSoon: true,
     year: "2024",
     emoji: "☁️🐍",
@@ -84,7 +84,7 @@ export default function Projects() {
             className="md:col-span-7 relative overflow-hidden bg-black flex items-center justify-center min-h-[320px] md:min-h-[450px] group"
             style={{ aspectRatio: "16/10" }}
           >
-            {/* Renderizado de imágenes (Solo si están definidas en el objeto) */}
+            {/* Renderizado de imágenes con object-contain para evitar recortes */}
             {PROJECTS_DATA.map((project, idx) => (
               project.image && (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -92,7 +92,7 @@ export default function Projects() {
                   key={project.id}
                   src={project.image}
                   alt={project.title}
-                  className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-102
+                  className={`absolute inset-0 w-full h-full object-contain p-2 md:p-4 transition-all duration-700 ease-in-out mix-blend-luminosity group-hover:mix-blend-normal group-hover:scale-102
                     ${activeProject === idx ? "opacity-100 visible" : "opacity-0 invisible"}`}
                 />
               )
@@ -113,7 +113,7 @@ export default function Projects() {
               </div>
             ) : null}
 
-            {/* Malla estructural estética (Solo visible en modo Emoji para dar textura de estudio) */}
+            {/* Malla estructural estética */}
             {!currentProject.image && (
               <div className="absolute inset-0 opacity-[0.02] pointer-events-none z-10">
                 <svg width="100%" height="100%">
@@ -230,7 +230,6 @@ export default function Projects() {
                   </p>
                 </div>
 
-                {/* En las pestañas inferiores también respeta la regla: si NO tiene imagen, muestra el emoji pequeño a la derecha */}
                 {!p.image && (
                   <span className="text-lg opacity-40 group-hover:opacity-100 transition-opacity select-none">
                     {p.emoji}
