@@ -229,7 +229,7 @@ export default function Hero() {
   {/* Contenedor del isotipo para controlar dimensiones exactas */}
   <div className="relative w-8 h-8 flex-shrink-0">
     <Image
-      src="/../assets/images/isotipo.png" // Cambia por la ruta de tu archivo
+      src="/assets/images/Isotipo.png" // Cambia por la ruta de tu archivo
       alt="DiamondCode Isotipo"
       fill
       className="object-contain"
