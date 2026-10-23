@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://diamondcode.mx"),
   title: {
-    default: "DiamondCode | Desarrollo de Software a la Medida y Automatizaciones con IA",
+    default: "DiamondCode",
     template: "%s | DiamondCode",
   },
   description:
