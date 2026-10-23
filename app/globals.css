@@ -1,106 +1,184 @@
 @import "tailwindcss";
 
+/* =========================================================
+   💎 DIAMONDCODE — SISTEMA DE DISEÑO CLARO (LIGHT PREMIUM)
+   ========================================================= */
+
 :root {
-  /* 💎 CONFIGURACIÓN POR DEFECTO: ULTRA PREMIUM DARK (Pure Black) */
-  --background: #000000;
-  --foreground: #ffffff;
-  
-  /* Sistema Axial (Bordes de 1px de precisión quirúrgica) */
-  --border: #18181b; /* zinc-900 */
-  --card: #000000;
-  --card-foreground: #e4e4e7; /* zinc-200 */
-  
-  /* Acentuaciones de Marca */
-  --primary: #22d3ee; /* cyan-400 */
-  --primary-foreground: #000000;
-  --muted: #09090b;
-  --muted-foreground: #71717a; /* zinc-500 */
-  --ring: rgba(34, 211, 238, 0.2);
+  /* Superficies */
+  --background: #ffffff;
+  --foreground: #0f172a;        /* slate-900 */
+  --surface: #f8fafc;           /* slate-50 — secciones alternas */
+  --surface-elevated: #ffffff;
 
-  /* Geometría pura a 90 grados (Efecto Estudio Minimalista) */
-  --radius: 0rem;
+  /* Bordes de precisión */
+  --border: #e2e8f0;            /* slate-200 */
+  --border-strong: #cbd5e1;     /* slate-300 */
 
-  /* Variables del Sistema */
-  --font-tenor: 'Tenor Sans', sans-serif;
-  --font-dm-mono: 'DM Mono', monospace;
+  /* Tipografía */
+  --muted: #475569;             /* slate-600 — párrafos */
+  --muted-foreground: #94a3b8;  /* slate-400 — metadata */
+
+  /* Acento único de marca */
+  --primary: #2563eb;           /* blue-600 */
+  --primary-hover: #1d4ed8;     /* blue-700 */
+  --primary-foreground: #ffffff;
+  --primary-soft: #eff6ff;      /* blue-50 — fondos sutiles */
+  --ring: rgba(37, 99, 235, 0.25);
+
+  /* Feedback */
+  --success: #10b981;           /* emerald-500 (WhatsApp) */
+  --success-soft: #ecfdf5;
+
+  /* Geometría — radios suaves y modernos */
+  --radius: 0.75rem;            /* 12px — rounded-xl */
+  --radius-sm: 0.5rem;
+  --radius-lg: 1rem;
+
+  /* Tipografía de marca */
+  --font-tenor: "Tenor Sans", serif;
+  --font-dm-mono: "DM Mono", monospace;
+  --font-bluter: "Bluter", sans-serif;
 }
 
-/* Forzar el modo oscuro OLED absoluto en cualquier configuración */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #ffffff;
-    --border: #18181b;
-  }
-}
+/* Sin media query de dark mode: app mono-tema clara intencionalmente.
+   Si algún día quieres dark mode real, aquí es donde lo reactivas. */
 
 /* 🗺️ EXTENSIÓN DEL TEMA EN TAILWIND v4 */
 @theme inline {
+  /* Colores del sistema */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
   --color-border: var(--border);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-border-strong: var(--border-strong);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-soft: var(--primary-soft);
   --color-ring: var(--ring);
-  
-  /* Radios ortogonales heredados */
-  --radius-sm: var(--radius);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+
+  /* Radios */
+  --radius-sm: var(--radius-sm);
   --radius-md: var(--radius);
-  --radius-lg: var(--radius);
-  
-  /* Inyección de tus fuentes de marca para usarlas como 'font-sans' y 'font-mono' */
+  --radius-lg: var(--radius-lg);
+
+  /* Fuentes expuestas a utilidades Tailwind */
   --font-sans: var(--font-tenor);
   --font-mono: var(--font-dm-mono);
+  --font-bluter: var(--font-bluter);
 }
 
-/* 📐 CAPA BASE DE ESTILOS GLOBO */
+/* =========================================================
+   📐 CAPA BASE
+   ========================================================= */
 @layer base {
-  * {
-    /* Aplica tus bordes de precisión por defecto en toda la app */
-    border-color: var(--border);
-    outline-color: var(--ring);
-  }
+  /* ... lo que ya tienes ... */
 
-  html, body {
-    /* 🛡️ BLINDAJE ANTI-SCROLL LATERAL MÓVIL */
-    max-width: 100vw;
-    overflow-x: hidden;
-  }
-
-  body {
-    background: var(--background);
-    color: var(--foreground);
-    font-family: var(--font-sans);
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  html {
-    scroll-behavior: smooth;
-  }
-
-  /* 🛠️ FIX DE PROPORCIONES TIPOGRÁFICAS EN V4 (Uso directo de utilidades o rems) */
+  /* Tipografía base más contenida — el tamaño grande va en el Hero, no en la base */
   h1 {
-    font-size: 3rem; /* Equivalente a text-5xl aproximado para mantener la jerarquía editorial */
-    line-height: 1.1;
-    letter-spacing: -0.025em;
+    font-size: 2.25rem;      /* 36px — antes 48px */
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-weight: 400;
   }
 
   h2 {
-    font-size: 1.875rem; /* Equivalente a text-3xl */
+    font-size: 1.75rem;      /* 28px — antes 30px */
     line-height: 1.2;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
+    font-weight: 400;
   }
 
-  /* Los botones y elementos técnicos usarán la tipografía Mono por defecto */
-  button, label {
-    font-family: var(--font-mono);
-    font-size: 0.75rem; /* Equivalente a text-xs */
-    letter-spacing: 0.15em;
+  h3 {
+    font-size: 1.25rem;      /* 20px */
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+  }
+}
+
+/* =========================================================
+   ✨ ANIMACIONES DE MARCA
+   ========================================================= */
+
+/* Float suave para el diamante del Hero (reemplaza bounce) */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-14px) scale(1.015);
+  }
+}
+
+/* Fade-in con desplazamiento sutil — para secciones al hacer scroll */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Pulso lento para indicadores "en vivo" */
+@keyframes soft-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* =========================================================
+   🧰 UTILIDADES PERSONALIZADAS
+   ========================================================= */
+@layer utilities {
+  .animate-float {
+    animation: float 8s ease-in-out infinite;
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out both;
+  }
+
+  .animate-soft-pulse {
+    animation: soft-pulse 2.5s ease-in-out infinite;
+  }
+
+  /* Grid de fondo reutilizable (para secciones tipo Hero) */
+  .bg-grid-slate {
+    background-image: linear-gradient(
+        to right,
+        var(--border) 1px,
+        transparent 1px
+      ),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+}
+
+/* =========================================================
+   🎬 RESPETO POR PREFERENCIAS DE MOVIMIENTO
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,118 +1,192 @@
+// app/sections/Services.tsx
 "use client";
 
-export default function Services() { 
-  const servicesList = [
-    {
-      number: "01",
-      category: "INTERFACES",
-      title: "Landing Pages",
-      desc: "Páginas de aterrizaje de alto impacto diseñadas milimétricamente para capturar clientes potenciales, validar ideas y lanzar tu producto al mercado."
-    },
-    {
-      number: "02",
-      category: "CORPORATIVO",
-      title: "Sitios Web Corporativos",
-      desc: "Desarrollo de portales modernos, responsivos y con SEO avanzado. Construimos una presencia digital robusta que posiciona tu marca frente a la competencia."
-    },
-    {
-      number: "03",
-      category: "SISTEMAS",
-      title: "Aplicaciones Web & SaaS",
-      desc: "Plataformas personalizadas, paneles de administración complejos (dashboards) e infraestructuras web escalables con lógica de negocio avanzada."
-    },
-    {
-      number: "04",
-      category: "INTERACTIVOS",
-      title: "Invitaciones Digitales Premium",
-      desc: "Experiencias interactivas para eventos especiales. Diseños web fluidos que incluyen confirmación en tiempo real, mapas dinámicos y mesas de regalos integradas."
-    },
-    {
-      number: "05",
-      category: "OPTIMIZACIÓN",
-      title: "Rediseño & Core Web Vitals",
-      desc: "Auditamos y transformamos plataformas obsoletas. Optimizamos la velocidad de carga, la experiencia de usuario (UX) y el rendimiento técnico general."
-    },
-    {
-      number: "06",
-      category: "ARQUITECTURA",
-      title: "Consultoría Tecnológica",
-      desc: "Asesoramiento estratégico en la selección de tecnologías digitales, metodologías de desarrollo y arquitectura de software para acelerar tu startup."
-    }
-  ];
+import { ArrowUpRight, Layout, Boxes, Sparkles, ShoppingCart, Gauge, Compass } from "lucide-react";
 
+const SERVICES = [
+  {
+    number: "01",
+    category: "Interfaces",
+    title: "Webs y Landings",
+    bullets: [
+      "Diseño enfocado a conversión",
+      "Copy persuasivo incluido",
+      "Formulario o WhatsApp conectado",
+      "Analítica configurada",
+    ],
+    icon: Layout,
+    featured: false,
+  },
+  {
+    number: "02",
+    category: "Plataformas",
+    title: "Sistemas a medida",
+    bullets: [
+      "Portales de clientes",
+      "Dashboards administrativos",
+      "APIs y base de datos",
+      "Autenticación y roles",
+    ],
+    icon: Boxes,
+    featured: true,
+  },
+  {
+    number: "03",
+    category: "Automatización",
+    title: "Integraciones con IA",
+    bullets: [
+      "Chatbots entrenados con tu data",
+      "Clasificación de documentos",
+      "Generación de reportes",
+      "Agentes de IA",
+    ],
+    icon: Sparkles,
+    featured: false,
+  },
+  {
+    number: "04",
+    category: "E-commerce",
+    title: "Tiendas y catálogos",
+    bullets: [
+      "Checkout integrado",
+      "Pasarelas de pago",
+      "Gestión de inventario",
+      "Envíos automatizados",
+    ],
+    icon: ShoppingCart,
+    featured: false,
+  },
+  {
+    number: "05",
+    category: "Optimización",
+    title: "Rediseño & Rendimiento",
+    bullets: [
+      "Auditoría técnica completa",
+      "Mejora de Core Web Vitals",
+      "Migración sin downtime",
+      "Reporte antes/después",
+    ],
+    icon: Gauge,
+    featured: false,
+  },
+  {
+    number: "06",
+    category: "Consultoría",
+    title: "Arquitectura de software",
+    bullets: [
+      "Selección de stack",
+      "Roadmap técnico por fases",
+      "Revisión de sistemas existentes",
+      "Acompañamiento de equipo",
+    ],
+    icon: Compass,
+    featured: false,
+  },
+];
+
+export default function Services() {
   return (
-    <section id="servicios" className="py-32 md:py-40 bg-black text-white border-t border-zinc-900 relative overflow-hidden">
-      
-      {/* 🔮 ILUMINACIÓN AMBIENTAL (Sutiles destellos circulares integrados) */}
-      <div className="absolute top-[10%] left-[5%] w-[600px] h-[600px] bg-cyan-500/[0.03] rounded-full blur-[140px] pointer-events-none z-0" />
-      <div className="absolute bottom-[5%] right-[5%] w-[550px] h-[550px] bg-blue-600/[0.03] rounded-full blur-[140px] pointer-events-none z-0" />
+    <section
+      id="servicios"
+      className="relative py-20 md:py-28 bg-slate-50 border-t border-slate-200 scroll-mt-20"
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
-        
-        {/* Cabecera asimétrica de alta costura digital */}
-        <div className="grid md:grid-cols-12 gap-8 mb-24">
+        {/* Cabecera */}
+        <div className="grid md:grid-cols-12 gap-8 mb-14">
           <div className="md:col-span-6">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-cyan-500/50" />
-              <span className="text-xs tracking-[0.25em] uppercase text-cyan-400" style={{ fontFamily: "'DM Mono', monospace" }}>
-                Capacidades
-              </span>
-            </div>
+            
             <h2
-              className="text-4xl md:text-6xl leading-tight text-white tracking-tight"
-              style={{ fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400 }}
+              className="text-4xl md:text-5xl leading-[1.05] text-slate-900 tracking-tight"
+              style={{ fontFamily: "var(--font-tenor)", fontWeight: 400 }}
             >
               Nuestros
-              <br />
-              servicios.
+              <span className="text-blue-700"> servicios.</span>
             </h2>
           </div>
-          <div className="md:col-span-5 md:col-start-8 flex items-end">
-            <p className="text-zinc-400 text-base leading-relaxed font-light">
-              Estructuramos, diseñamos y desplegamos ecosistemas web de alto rendimiento optimizados para la conversión. Cada solución se ejecuta con precisión quirúrgica.
-            </p>
-          </div>
+       
         </div>
 
-        {/* REJILLA DE BORDES AXIALES (Se genera una cuadrícula perfecta de 3 columnas en desktop) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-900/40 border border-zinc-900/60">
-          {servicesList.map((service) => (
-            <div
-              key={service.number}
-              className="bg-black p-10 group hover:bg-zinc-950/40 transition-colors duration-300 cursor-default flex flex-col justify-between min-h-[280px]"
-            >
-              <div>
-                {/* Categoría y Número en Mono */}
+        {/* Grid de servicios */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {SERVICES.map((service) => {
+            const Icon = service.icon;
+            const isFeatured = service.featured;
+
+            return (
+              <div
+                key={service.number}
+                className={`group relative flex flex-col p-7 rounded-xl border transition-all duration-300 ${
+                  isFeatured
+                    ? "bg-white border-blue-700/30 shadow-lg shadow-blue-700/5 hover:shadow-xl hover:shadow-blue-700/10"
+                    : "bg-white border-slate-200 hover:border-slate-300 hover:shadow-md"
+                }`}
+              >
+                {/* Badge featured */}
+                {isFeatured && (
+                  <span
+                    className="absolute top-5 right-5 text-[9px] tracking-[0.2em] uppercase text-blue-700 bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-full font-medium"
+                    style={{ fontFamily: "var(--font-dm-mono)" }}
+                  >
+                    Popular
+                  </span>
+                )}
+
+                {/* Icono */}
                 <div
-                  className="text-[10px] tracking-[0.2em] uppercase text-cyan-400/80 mb-8 flex justify-between items-center"
-                  style={{ fontFamily: "'DM Mono', monospace" }}
+                  className={`w-11 h-11 rounded-lg flex items-center justify-center mb-5 transition-colors duration-300 ${
+                    isFeatured
+                      ? "bg-blue-700 text-white"
+                      : "bg-slate-100 text-slate-700 group-hover:bg-blue-700 group-hover:text-white"
+                  }`}
                 >
-                  <span>{service.number} // {service.category}</span>
+                  <Icon className="w-5 h-5" strokeWidth={1.5} />
                 </div>
 
-                {/* Título Elegante */}
+                {/* Número y categoría */}
+                <div
+                  className="text-[10px] tracking-[0.2em] uppercase text-slate-400 mb-2 flex items-center gap-2"
+                  style={{ fontFamily: "var(--font-dm-mono)" }}
+                >
+                  <span>{service.number}</span>
+                  <span className="w-1 h-1 rounded-full bg-slate-300" />
+                  <span>{service.category}</span>
+                </div>
+
+                {/* Título */}
                 <h3
-                  className="text-2xl text-white mb-4 leading-tight tracking-tight group-hover:text-cyan-400 transition-colors duration-300"
-                  style={{ fontFamily: "'Tenor Sans', sans-serif", fontWeight: 400 }}
+                  className={`text-xl md:text-2xl mb-5 leading-tight tracking-tight transition-colors duration-300 ${
+                    isFeatured
+                      ? "text-blue-700"
+                      : "text-slate-900 group-hover:text-blue-700"
+                  }`}
+                  style={{ fontFamily: "var(--font-tenor)", fontWeight: 400 }}
                 >
                   {service.title}
                 </h3>
-                
-                {/* Descripción Fluida */}
-                <p className="text-zinc-400 text-sm leading-relaxed font-light">
-                  {service.desc}
-                </p>
-              </div>
 
-              {/* Detalle decorativo minimalista al final de cada tarjeta */}
-              <div className="mt-8 pt-4 border-t border-zinc-900/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <span className="text-[10px] text-zinc-600 tracking-widest uppercase font-mono">Precision System</span>
+                {/* Bullets */}
+                <ul className="space-y-2 mb-6 flex-1">
+                  {service.bullets.map((bullet) => (
+                    <li
+                      key={bullet}
+                      className="flex items-start gap-2 text-sm text-slate-600 font-light leading-relaxed"
+                    >
+                      <span className="text-blue-700 mt-1.5 flex-shrink-0 text-[8px]">
+                        ▸
+                      </span>
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+
+             
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
       </div>
     </section>
-  );      
+  );
 }
