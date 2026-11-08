@@ -107,18 +107,21 @@ export default function Projects() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-200/40 overflow-hidden">
           {/* Lado izquierdo: flechas + visor */}
           <div className="lg:col-span-7 relative bg-slate-50 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 min-h-[360px] lg:min-h-[520px]">
-            <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-3 md:gap-4">
+            <div className="w-full flex flex-row items-center justify-center gap-2 sm:gap-3 md:gap-4">
               {/* Flecha IZQUIERDA */}
               <button
                 onClick={goPrev}
                 aria-label="Proyecto anterior"
-                className="order-1 sm:order-none flex-shrink-0 inline-flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-slate-300 bg-white hover:border-blue-700 hover:bg-blue-700 text-slate-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+                className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-slate-300 bg-white hover:border-blue-700 hover:bg-blue-700 text-slate-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
               >
-                <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+                <ArrowLeft
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  strokeWidth={2.5}
+                />
               </button>
 
               {/* Visor con gradiente */}
-              <div className="relative w-full max-w-[460px] aspect-[4/3] rounded-2xl overflow-hidden ring-1 ring-slate-200/80 shadow-lg shadow-slate-200/50 group">
+              <div className="relative flex-1 max-w-[460px] aspect-[4/3] rounded-2xl overflow-hidden ring-1 ring-slate-200/80 shadow-lg shadow-slate-200/50 group">
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${currentProject.gradient} transition-all duration-700`}
                 />
@@ -140,28 +143,32 @@ export default function Projects() {
                   />
                 </div>
 
-                <div className="relative h-full flex flex-col items-center justify-center px-6 sm:px-8 text-center">
+                <div className="relative h-full flex flex-col items-center justify-center px-4 sm:px-6 md:px-8 text-center">
                   <p
-                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-slate-900 leading-[0.95] tracking-tight"
-                    style={{ fontFamily: "var(--font-tenor)", fontWeight: 400 }}
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-slate-900 leading-[0.95] tracking-tight"
+                    style={{
+                      fontFamily: "var(--font-tenor)",
+                      fontWeight: 400,
+                    }}
                   >
                     {currentProject.title}
                   </p>
                   <div
-                    className={`mt-5 sm:mt-6 h-px w-16 ${currentProject.accent} opacity-40`}
+                    className={`mt-4 sm:mt-5 md:mt-6 h-px w-12 sm:w-16 ${currentProject.accent} opacity-40`}
                     style={{ backgroundColor: "currentColor" }}
                   />
                 </div>
 
+                {/* Overlay hover — SOLO desktop */}
                 {!currentProject.isComingSoon && (
                   <a
                     href={currentProject.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="absolute inset-0 z-20 flex items-center justify-center bg-slate-900/0 group-hover:bg-slate-900/20 transition-all duration-500"
+                    className="hidden lg:flex absolute inset-0 z-20 items-center justify-center bg-slate-900/0 group-hover:bg-slate-900/20 transition-all duration-500"
                     aria-label={`Visitar sitio de ${currentProject.title}`}
                   >
-                    <span className="flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase font-medium shadow-xl opacity-100 lg:opacity-0 lg:group-hover:opacity-100 translate-y-0 lg:translate-y-2 lg:group-hover:translate-y-0 transition-all duration-300">
+                    <span className="flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase font-medium shadow-xl opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                       Visitar sitio
                       <ArrowUpRight className="w-4 h-4" />
                     </span>
@@ -173,9 +180,12 @@ export default function Projects() {
               <button
                 onClick={goNext}
                 aria-label="Proyecto siguiente"
-                className="order-2 sm:order-none flex-shrink-0 inline-flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-slate-300 bg-white hover:border-blue-700 hover:bg-blue-700 text-slate-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+                className="flex-shrink-0 inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-slate-300 bg-white hover:border-blue-700 hover:bg-blue-700 text-slate-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
               >
-                <ArrowRight className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+                <ArrowRight
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  strokeWidth={2.5}
+                />
               </button>
             </div>
           </div>
