@@ -2,7 +2,12 @@
 "use client";
 
 import { useState } from "react";
-import { ExternalLink, ArrowUpRight, ArrowLeft, ArrowRight } from "lucide-react";
+import {
+  ExternalLink,
+  ArrowUpRight,
+  ArrowLeft,
+  ArrowRight,
+} from "lucide-react";
 
 const PROJECTS_DATA = [
   {
@@ -11,25 +16,25 @@ const PROJECTS_DATA = [
     subtitle: "Web de Servicios & Banquetes",
     description:
       "Diseño y desarrollo de una plataforma web premium para servicios de banquetería y experiencias gastronómicas privadas. Optimizamos la reserva de menús, la gestión de eventos y la presentación del catálogo de alta cocina del chef.",
-    tags: ["Next.js", "Tailwind CSS", "Framer Motion"],
     href: "https://www.itacate.it.com/",
-    image: "/assets/images/project1.jpeg",
     isComingSoon: false,
     year: "2024",
-    emoji: "🍲👨‍🍳",
+    gradient: "from-amber-50 via-orange-50 to-rose-50",
+    accent: "text-amber-800",
+    shape: "circle" as const,
   },
   {
     id: "02",
-    title: "Nube Serpiente",
-    subtitle: "Plataforma Digital Web",
+    title: "Invitación digital",
+    subtitle: "Invitación digital de XV años",
     description:
-      "Desarrollamos la plataforma web oficial para este innovador centro deportivo y cultural. Diseñamos una experiencia digital fluida que conecta a la comunidad, facilitando la difusión de eventos culturales y la gestión de actividades deportivas en un solo lugar.",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript"],
-    href: "#",
-    image: "",
-    isComingSoon: true,
+      "Desarrollamos invitaciones digitales personalizadas para cualquier tipo de evento.",
+    href: "https://invitacionjade.vercel.app/",
+    isComingSoon: false,
     year: "2024",
-    emoji: "☁️🐍",
+    gradient: "from-emerald-50 via-teal-50 to-cyan-50",
+    accent: "text-emerald-800",
+    shape: "square" as const,
   },
 ];
 
@@ -37,16 +42,22 @@ export default function Projects() {
   const [activeProject, setActiveProject] = useState(0);
   const currentProject = PROJECTS_DATA[activeProject];
 
+  const goPrev = () =>
+    setActiveProject(
+      (activeProject - 1 + PROJECTS_DATA.length) % PROJECTS_DATA.length
+    );
+  const goNext = () =>
+    setActiveProject((activeProject + 1) % PROJECTS_DATA.length);
+
   return (
     <section
       id="projects"
       className="relative py-24 md:py-32 bg-white border-t border-slate-200 text-slate-900 scroll-mt-20"
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-
         {/* Cabecera */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-14">
-          <div className="md:col-span-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-10">
+          <div>
             <h2
               className="text-4xl md:text-5xl leading-[1.05] text-slate-900 tracking-tight"
               style={{ fontFamily: "var(--font-tenor)", fontWeight: 400 }}
@@ -56,134 +67,116 @@ export default function Projects() {
             </h2>
           </div>
 
-          {/* Navegación: flechas + dots */}
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() =>
-                setActiveProject(
-                  (activeProject - 1 + PROJECTS_DATA.length) %
-                    PROJECTS_DATA.length
-                )
-              }
-              aria-label="Proyecto anterior"
-              className="w-9 h-9 rounded-full border border-slate-200 bg-white hover:border-blue-700 hover:bg-blue-50 text-slate-600 hover:text-blue-700 flex items-center justify-center transition-all duration-200 cursor-pointer"
+          {/* Contador + dots arriba a la derecha */}
+          <div className="flex items-center gap-4">
+            <span
+              className="text-sm text-slate-500 tabular-nums font-medium"
+              style={{ fontFamily: "var(--font-dm-mono)" }}
+              aria-live="polite"
             >
-              <ArrowLeft className="w-4 h-4" />
-            </button>
+              <span className="text-slate-900 font-semibold">
+                {String(activeProject + 1).padStart(2, "0")}
+              </span>
+              <span className="mx-0.5">/</span>
+              <span>{String(PROJECTS_DATA.length).padStart(2, "0")}</span>
+            </span>
 
             <div className="flex items-center gap-2">
-              {PROJECTS_DATA.map((_, i) => (
+              {PROJECTS_DATA.map((project, i) => (
                 <button
-                  key={i}
+                  key={project.id}
                   onClick={() => setActiveProject(i)}
-                  aria-label={`Ver proyecto ${i + 1}`}
-                  className="transition-all duration-300 cursor-pointer rounded-full"
-                  style={{
-                    width: activeProject === i ? "32px" : "8px",
-                    height: "8px",
-                    background:
+                  aria-label={`Ir al proyecto ${i + 1}: ${project.title}`}
+                  aria-current={activeProject === i ? "true" : undefined}
+                  className="group flex items-center justify-center cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700 rounded-full transition-all duration-300"
+                >
+                  <span
+                    className={`block rounded-full transition-all duration-300 ${
                       activeProject === i
-                        ? "var(--primary)"
-                        : "var(--border-strong)",
-                  }}
-                />
+                        ? "w-8 h-2.5 bg-blue-700"
+                        : "w-2.5 h-2.5 bg-slate-300 group-hover:bg-slate-400"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
-
-            <button
-              onClick={() =>
-                setActiveProject((activeProject + 1) % PROJECTS_DATA.length)
-              }
-              aria-label="Proyecto siguiente"
-              className="w-9 h-9 rounded-full border border-slate-200 bg-white hover:border-blue-700 hover:bg-blue-50 text-slate-600 hover:text-blue-700 flex items-center justify-center transition-all duration-200 cursor-pointer"
-            >
-              <ArrowRight className="w-4 h-4" />
-            </button>
           </div>
         </div>
 
         {/* Tarjeta destacada */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 bg-white border border-slate-200 rounded-2xl shadow-xl shadow-slate-200/40 overflow-hidden">
+          {/* Lado izquierdo: flechas + visor */}
+          <div className="lg:col-span-7 relative bg-slate-50 flex items-center justify-center p-4 sm:p-6 md:p-8 lg:p-10 min-h-[360px] lg:min-h-[520px]">
+            <div className="w-full flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-3 md:gap-4">
+              {/* Flecha IZQUIERDA */}
+              <button
+                onClick={goPrev}
+                aria-label="Proyecto anterior"
+                className="order-1 sm:order-none flex-shrink-0 inline-flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-slate-300 bg-white hover:border-blue-700 hover:bg-blue-700 text-slate-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+              >
+                <ArrowLeft className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+              </button>
 
-          {/* Lado izquierdo: visor de imagen contenido */}
-          <div className="lg:col-span-7 relative bg-slate-50 overflow-hidden group flex items-center justify-center p-6 md:p-10 min-h-[320px] lg:min-h-[520px]">
+              {/* Visor con gradiente */}
+              <div className="relative w-full max-w-[460px] aspect-[4/3] rounded-2xl overflow-hidden ring-1 ring-slate-200/80 shadow-lg shadow-slate-200/50 group">
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${currentProject.gradient} transition-all duration-700`}
+                />
 
-            {/* Contenedor con aspect-ratio fijo y padding — la imagen nunca se desborda */}
-            <div className="relative w-full max-w-[520px] aspect-[4/3] rounded-2xl overflow-hidden bg-slate-100 ring-1 ring-slate-200 shadow-lg shadow-slate-200/50">
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div
+                    className={`w-[85%] h-[85%] border border-white/40 transition-all duration-700 ${
+                      currentProject.shape === "circle"
+                        ? "rounded-full"
+                        : "rounded-[2rem] rotate-3"
+                    }`}
+                  />
+                  <div
+                    className={`absolute w-[65%] h-[65%] border border-white/30 transition-all duration-700 ${
+                      currentProject.shape === "circle"
+                        ? "rounded-full"
+                        : "rounded-[2rem] -rotate-6"
+                    }`}
+                  />
+                </div>
 
-              {/* Imágenes — crossfade suave */}
-              {PROJECTS_DATA.map(
-                (project, idx) =>
-                  project.image && (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      key={project.id}
-                      src={project.image}
-                      alt={`Captura del proyecto ${project.title}`}
-                      loading={idx === 0 ? "eager" : "lazy"}
-                      decoding="async"
-                      className={`absolute inset-0 w-full h-full object-cover object-center transition-all duration-700 ease-in-out ${
-                        activeProject === idx
-                          ? "opacity-100 scale-100"
-                          : "opacity-0 scale-105 pointer-events-none"
-                      }`}
-                    />
-                  )
-              )}
-
-              {/* Overlay en hover — invita a visitar */}
-              {currentProject.image && !currentProject.isComingSoon && (
-                <a
-                  href={currentProject.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute inset-0 z-20 flex items-center justify-center bg-slate-900/0 group-hover:bg-slate-900/40 transition-all duration-500"
-                  aria-label={`Visitar sitio de ${currentProject.title}`}
-                >
-                  <span className="flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase font-medium shadow-xl opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                    Visitar sitio
-                    <ArrowUpRight className="w-4 h-4" />
-                  </span>
-                </a>
-              )}
-
-              {/* Modo respaldo: sin imagen → emoji + texto */}
-              {!currentProject.image && (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 select-none">
-                  <div className="text-6xl md:text-7xl mb-4 filter grayscale-[0.2]">
-                    {currentProject.emoji}
-                  </div>
+                <div className="relative h-full flex flex-col items-center justify-center px-6 sm:px-8 text-center">
                   <p
-                    className="text-[10px] uppercase tracking-[0.25em] text-slate-400 font-mono"
-                    style={{ fontFamily: "var(--font-dm-mono)" }}
+                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-slate-900 leading-[0.95] tracking-tight"
+                    style={{ fontFamily: "var(--font-tenor)", fontWeight: 400 }}
                   >
-                    Vista previa próximamente
+                    {currentProject.title}
                   </p>
+                  <div
+                    className={`mt-5 sm:mt-6 h-px w-16 ${currentProject.accent} opacity-40`}
+                    style={{ backgroundColor: "currentColor" }}
+                  />
                 </div>
-              )}
 
-              {/* Grid sutil cuando no hay imagen */}
-              {!currentProject.image && (
-                <div className="absolute inset-0 opacity-[0.06] pointer-events-none">
-                  <svg width="100%" height="100%">
-                    <pattern
-                      id="card-grid"
-                      width="40"
-                      height="40"
-                      patternUnits="userSpaceOnUse"
-                    >
-                      <rect
-                        width="40"
-                        height="40"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1"
-                      />
-                    </pattern>
-                    <rect width="100%" height="100%" fill="url(#card-grid)" />
-                  </svg>
-                </div>
-              )}
+                {!currentProject.isComingSoon && (
+                  <a
+                    href={currentProject.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="absolute inset-0 z-20 flex items-center justify-center bg-slate-900/0 group-hover:bg-slate-900/20 transition-all duration-500"
+                    aria-label={`Visitar sitio de ${currentProject.title}`}
+                  >
+                    <span className="flex items-center gap-2 bg-white text-slate-900 px-6 py-3 rounded-full text-xs tracking-[0.2em] uppercase font-medium shadow-xl opacity-100 lg:opacity-0 lg:group-hover:opacity-100 translate-y-0 lg:translate-y-2 lg:group-hover:translate-y-0 transition-all duration-300">
+                      Visitar sitio
+                      <ArrowUpRight className="w-4 h-4" />
+                    </span>
+                  </a>
+                )}
+              </div>
+
+              {/* Flecha DERECHA */}
+              <button
+                onClick={goNext}
+                aria-label="Proyecto siguiente"
+                className="order-2 sm:order-none flex-shrink-0 inline-flex items-center justify-center w-12 h-12 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border-2 border-slate-300 bg-white hover:border-blue-700 hover:bg-blue-700 text-slate-700 hover:text-white shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-700"
+              >
+                <ArrowRight className="w-5 h-5 md:w-6 md:h-6" strokeWidth={2.5} />
+              </button>
             </div>
           </div>
 
@@ -214,22 +207,8 @@ export default function Projects() {
               <p className="text-slate-600 text-sm md:text-base leading-relaxed mb-8 font-light">
                 {currentProject.description}
               </p>
-
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                {currentProject.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="text-[10px] px-3 py-1.5 border border-slate-200 text-slate-600 bg-slate-50 rounded-full"
-                    style={{ fontFamily: "var(--font-dm-mono)" }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
             </div>
 
-            {/* Acciones */}
             <div className="pt-6 border-t border-slate-200">
               {currentProject.isComingSoon ? (
                 <span
@@ -258,7 +237,6 @@ export default function Projects() {
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );
